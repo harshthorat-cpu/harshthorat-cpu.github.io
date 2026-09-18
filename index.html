@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Harsh Thorat</title>
-<meta name="description" content="Harsh Thorat — communication, cryptography, and PLATYPULSE.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="description" content="Harsh Thorat — communication, cryptography, PLATYPULSE, and GantryMate-200."><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Devanagari:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -120,6 +119,9 @@
   .photo-frame{
     flex:0 0 auto;
     width:220px;
+    border-radius:3px;
+    overflow:hidden;
+    border:1px solid var(--line);
   }
   .photo-frame img{
     display:block;
@@ -127,17 +129,20 @@
     height:auto;
     object-fit:contain;
   }
-  .photo-caption{
+
+  .eyebrow{
+    display:block;
     font-family:'JetBrains Mono', monospace;
-    font-size:11px;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
     color:var(--ink-soft);
-    padding-top:8px;
-    letter-spacing:0.02em;
+    margin-bottom:16px;
   }
 
   /* ---------- sections ---------- */
   section{
-    padding:46px 0;
+    padding:52px 0;
     border-top:1px solid var(--line);
   }
 
@@ -154,52 +159,76 @@
     font-size:16px;
   }
 
-  /* ---------- project ---------- */
-  .project{
-    position:relative;
-    overflow:hidden;
-    border-radius:2px;
+  /* ---------- projects ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
   }
-  .project-backdrop{
+  .project-card{
+    position:relative;
+    display:block;
+    overflow:hidden;
+    padding:22px 22px 24px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    text-decoration:none;
+    color:inherit;
+    transition:transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(44,43,40,0.08);
+    border-color:var(--teal);
+  }
+  .card-backdrop{
     position:absolute;
     inset:0;
     z-index:0;
     font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.12em;
-    line-height:3.4;
-    color:var(--ink-soft);
-    opacity:0.06;
+    font-size:10px;
+    letter-spacing:0.1em;
+    line-height:3.6;
     color:var(--line);
+    opacity:0.65;
     white-space:pre-wrap;
     word-break:break-all;
-    padding:6px;
+    padding:4px;
     pointer-events:none;
     user-select:none;
   }
-  .project-inner{
-    position:relative;
-    z-index:1;
-  }
-  .project-name{
+  .card-body{ position:relative; z-index:1; }
+  .card-tag{
     font-family:'JetBrains Mono', monospace;
-    font-size:13px;
+    font-size:12px;
     color:var(--clay);
     letter-spacing:0.02em;
-    margin-bottom:8px;
     display:block;
+    margin-bottom:10px;
   }
-  .project-links{
-    margin-top:18px;
+  .project-card h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:19px;
+    margin:0 0 10px;
+  }
+  .project-card p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+    max-width:none;
+  }
+  .card-link{
     font-family:'JetBrains Mono', monospace;
-    font-size:13.5px;
-  }
-  .project-links a{
+    font-size:13px;
     color:var(--teal);
-    text-decoration:none;
-    border-bottom:1px solid var(--wave);
   }
-  .project-links a:hover{ color:var(--ink); border-color:var(--ink); }
+  .project-card:hover .card-link{ color:var(--ink); }
+
+  @media (max-width:640px){
+    .project-grid{ grid-template-columns:1fr; }
+  }
 
   /* ---------- links / footer ---------- */
   .link-list{
@@ -235,8 +264,9 @@
     width:74px;
     height:74px;
     z-index:5;
-    perspective:400px;
-    pointer-events:none;
+    perspective:420px;
+    pointer-events:auto;
+    cursor:default;
   }
   #cube{
     width:100%;
@@ -244,35 +274,32 @@
     position:relative;
     transform-style:preserve-3d;
   }
-  .face{
+  .cubelet{
     position:absolute;
-    width:74px;
-    height:74px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    grid-template-rows:repeat(3,1fr);
-    gap:2px;
-    padding:3px;
-    background:#2c2b28;
-    box-shadow:0 4px 10px rgba(44,43,40,0.1);
+    transform-style:preserve-3d;
   }
-  .face div{ border-radius:1px; }
-  .f-front{ transform:translateZ(37px); }
-  .f-back{  transform:rotateY(180deg) translateZ(37px); }
-  .f-right{ transform:rotateY(90deg) translateZ(37px); }
-  .f-left{  transform:rotateY(-90deg) translateZ(37px); }
-  .f-top{   transform:rotateX(90deg) translateZ(37px); }
-  .f-bottom{transform:rotateX(-90deg) translateZ(37px); }
+  .cubelet-inner{
+    position:absolute;
+    inset:0;
+    transform-style:preserve-3d;
+  }
+  .layer-wrap{
+    position:absolute;
+    inset:0;
+    transform-style:preserve-3d;
+  }
+  .sticker{
+    position:absolute;
+    inset:0;
+    border-radius:2px;
+    box-shadow:inset 0 0 0 1px rgba(44,43,40,0.35);
+  }
 
   @media (max-width:600px){
     #cube-stage{ width:52px; height:52px; right:16px; bottom:16px; }
-    #cube{ }
-    .face{ width:52px; height:52px; }
-    .f-front,.f-back,.f-right,.f-left,.f-top,.f-bottom{ }
   }
 
   @media (prefers-reduced-motion: reduce){
-    #cube{ animation:none !important; }
     .name-cycle span{ transition:none; }
   }
 </style>
@@ -297,33 +324,43 @@
 
     <div class="hero-row">
       <div class="hero-text">
-        <p>I've always wanted to know what's actually happening underneath things — that's probably why electrical engineering felt like the right place to start, and why a minor in quantum technology keeps handing me stranger questions than I bargained for. Lately I can't stop poking at communication and cryptography: how a signal actually gets from one place to another, and how much of it can be hidden in plain sight.</p>
-        <p>I solve cubes to keep my hands busy while my head works on something else, and most of what I build starts the same way — with a "wait, how does that even work?" I can't quite let go of.</p>
+        <p>I'm an Electrical Engineering student with a minor in Quantum Technology and a naturally curious mind. I enjoy exploring how things work and turning ideas into things I can build. Over time, I've found myself increasingly interested in communication, cryptography, and electronics — mostly because there's always something new to uncover.</p>
+        <p>Outside of engineering, I'm a speedcuber. I enjoy the mix of pattern recognition, problem-solving, and the satisfaction of taking something scrambled and working out the path back to solved.</p>
       </div>
       <div>
         <div class="photo-frame">
           <img src="assets/harsh.jpg" alt="Harsh as a kid, sitting on a scooter" loading="lazy">
         </div>
-        <div class="photo-caption">15 · 09 · 09</div>
       </div>
     </div>
   </div>
 
-  <section class="wrap project" id="project">
-    <div class="project-backdrop" aria-hidden="true" id="project-backdrop"></div>
-    <div class="project-inner">
-      <span class="project-name">PLATYPULSE</span>
-      <h2>one board, three wireless worlds</h2>
-      <p>PLATYPULSE is a unified handheld I've been building with a teammate under SRA-VJTI's Eklavya program — the kind of thing I keep coming back to because it sits exactly where my interests overlap. RF, RFID/NFC, and IR each speak their own language and usually need their own separate tool to work with; PLATYPULSE brings all three into one board so you can capture, analyze, store, and replay signals from a single interface instead of juggling three.</p>
-      <p>It borrows a fair bit of its spirit from the Flipper Zero, but the point was never to clone it — it was to actually understand what happens when a signal is caught, held, and sent back out again, down at the hardware and firmware level. That's the part that ties back to everything else I care about: communication as a practical, physical thing, and cryptography as the question of what a captured signal can, or can't, be made to reveal.</p>
-      <div class="project-links">
-        <a href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">view the repo →</a>
-      </div>
+  <section class="wrap" id="projects">
+    <span class="eyebrow">projects</span>
+    <div class="project-grid">
+      <a class="project-card" href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">
+        <div class="card-backdrop" data-tokens="ESP32-S3,CC1101,PN532,RFID,NFC,IR,RF,SUBGHZ,TX,RX,SPI,GPIO"></div>
+        <div class="card-body">
+          <span class="card-tag">01</span>
+          <h3>PLATYPULSE</h3>
+          <p>A unified handheld built around the ESP32-S3 that brings RF, RFID/NFC, and IR into one interface — capture, analyze, store, and transmit signals without juggling three separate tools.</p>
+          <span class="card-link">view repo →</span>
+        </div>
+      </a>
+      <a class="project-card" href="https://github.com/harshthorat-cpu/Eklavya_Gantry" target="_blank" rel="noopener">
+        <div class="card-backdrop" data-tokens="ESP32,DRV8825,NEMA17,GANTRY,STEPPER,KICAD,ONSHAPE,XYZ"></div>
+        <div class="card-body">
+          <span class="card-tag">02</span>
+          <h3>GantryMate‑200</h3>
+          <p>An automated 3-axis gantry that screws and unscrews miniature 1mm screws on delicate LED panels — sub-millimeter accuracy, built for speed around sensitive circuitry.</p>
+          <span class="card-link">view repo →</span>
+        </div>
+      </a>
     </div>
   </section>
 
   <section class="wrap" id="links">
-    <h2>elsewhere</h2>
+    <span class="eyebrow">elsewhere</span>
     <div class="link-list">
       <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">LinkedIn</a>
@@ -336,15 +373,8 @@
   </footer>
 </main>
 
-<div id="cube-stage">
-  <div id="cube">
-    <div class="face f-front"></div>
-    <div class="face f-back"></div>
-    <div class="face f-right"></div>
-    <div class="face f-left"></div>
-    <div class="face f-top"></div>
-    <div class="face f-bottom"></div>
-  </div>
+<div id="cube-stage" title="hover to solve">
+  <div id="cube"></div>
 </div>
 
 <script>
@@ -492,51 +522,183 @@
   draw();
 })();
 
-/* ---------------- continuously "solving" rubik's cube ---------------- */
+/* ---------------- real 3x3x3 rubik's cube: scrambles idly, actually solves on hover ---------------- */
 (function(){
+  const stage = document.getElementById('cube-stage');
   const cube = document.getElementById('cube');
-  const colors = ['#c94f3d', '#e8a13c', '#4f7f5c', '#f0e4c3', '#5b7c99', '#e9e5da']; // calm-ish cube palette
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = window.matchMedia('(max-width:600px)').matches;
 
-  const faces = document.querySelectorAll('.face');
-  function paintFace(face){
-    face.innerHTML = '';
-    const base = colors[Math.floor(Math.random()*colors.length)];
-    for (let i = 0; i < 9; i++){
-      const sticker = document.createElement('div');
-      sticker.style.background = Math.random() < 0.72 ? base : colors[Math.floor(Math.random()*colors.length)];
-      face.appendChild(sticker);
+  const SIZE = isSmall ? 15 : 21;      // cubelet edge length
+  const GAP = 2;
+  const SPACING = SIZE + GAP;          // distance between cubelet centers
+  const HALF = SIZE / 2;
+
+  const COLORS = {
+    front:  '#4f7f5c',
+    back:   '#5b7c99',
+    right:  '#c94f3d',
+    left:   '#e8a13c',
+    top:    '#f0e4c3',
+    bottom: '#e0c34a'
+  };
+  const FACE_TRANSFORM = {
+    front:  `translateZ(${HALF}px)`,
+    back:   `rotateY(180deg) translateZ(${HALF}px)`,
+    right:  `rotateY(90deg) translateZ(${HALF}px)`,
+    left:   `rotateY(-90deg) translateZ(${HALF}px)`,
+    top:    `rotateX(90deg) translateZ(${HALF}px)`,
+    bottom: `rotateX(-90deg) translateZ(${HALF}px)`
+  };
+  const AXIS_LETTER = { x:'X', y:'Y', z:'Z' };
+
+  // build 27 cubelets
+  const cubelets = [];
+  for (let x = -1; x <= 1; x++){
+    for (let y = -1; y <= 1; y++){
+      for (let z = -1; z <= 1; z++){
+        const outer = document.createElement('div');
+        outer.className = 'cubelet';
+        outer.style.width = SIZE + 'px';
+        outer.style.height = SIZE + 'px';
+        outer.style.left = '50%';
+        outer.style.top = '50%';
+        outer.style.marginLeft = (-HALF) + 'px';
+        outer.style.marginTop = (-HALF) + 'px';
+        outer.style.transform = `translate3d(${x*SPACING}px, ${y*SPACING}px, ${z*SPACING}px)`;
+
+        const inner = document.createElement('div');
+        inner.className = 'cubelet-inner';
+
+        Object.keys(FACE_TRANSFORM).forEach(face => {
+          const sticker = document.createElement('div');
+          sticker.className = 'sticker';
+          sticker.style.background = COLORS[face];
+          sticker.style.transform = FACE_TRANSFORM[face];
+          inner.appendChild(sticker);
+        });
+
+        outer.appendChild(inner);
+        cube.appendChild(outer);
+        cubelets.push({ el: outer, inner, x, y, z, rot: '' });
+      }
     }
   }
-  faces.forEach(paintFace);
 
-  // reshuffle a random face every so often to feel like a move being made
-  setInterval(() => {
-    const f = faces[Math.floor(Math.random()*faces.length)];
-    paintFace(f);
-  }, 1400);
+  // rotate a 90deg layer turn. axis: 'x'|'y'|'z', layer: -1|0|1, dir: 1|-1
+  function rotateLayer(axis, layer, dir, animate, done){
+    const group = cubelets.filter(c => c[axis] === layer);
 
-  // continuous, never-resting rotation — always mid-solve
+    function applyFinal(){
+      group.forEach(c => {
+        let nx = c.x, ny = c.y, nz = c.z;
+        if (axis === 'x'){ ny = -c.z*dir; nz = c.y*dir; }
+        else if (axis === 'y'){ nx = c.z*dir; nz = -c.x*dir; }
+        else { nx = -c.y*dir; ny = c.x*dir; }
+        c.x = nx; c.y = ny; c.z = nz;
+        c.rot = `rotate${AXIS_LETTER[axis]}(${90*dir}deg) ${c.rot}`.trim();
+        c.el.style.transition = 'none';
+        c.el.style.transform = `translate3d(${nx*SPACING}px, ${ny*SPACING}px, ${nz*SPACING}px)`;
+        c.inner.style.transform = c.rot;
+      });
+    }
+
+    if (!animate || reduce){
+      applyFinal();
+      done && done();
+      return;
+    }
+
+    const wrap = document.createElement('div');
+    wrap.className = 'layer-wrap';
+    cube.appendChild(wrap);
+    group.forEach(c => wrap.appendChild(c.el));
+
+    // force reflow so the transition below actually animates
+    wrap.getBoundingClientRect();
+    wrap.style.transition = 'transform 320ms cubic-bezier(.4,.1,.2,1)';
+    wrap.style.transform = `rotate${AXIS_LETTER[axis]}(${90*dir}deg)`;
+
+    let finished = false;
+    function finish(){
+      if (finished) return;
+      finished = true;
+      group.forEach(c => cube.appendChild(c.el));
+      wrap.remove();
+      applyFinal();
+      done && done();
+    }
+    wrap.addEventListener('transitionend', finish, { once:true });
+    setTimeout(finish, 420); // safety fallback
+  }
+
+  const AXES = ['x','y','z'];
+  const LAYERS = [-1,0,1];
+  function randomMove(){
+    return {
+      axis: AXES[Math.floor(Math.random()*3)],
+      layer: LAYERS[Math.floor(Math.random()*3)],
+      dir: Math.random() < 0.5 ? 1 : -1
+    };
+  }
+
+  let isAnimating = false;
+  let hovering = false;
+  const history = [];
+
+  function scrambleStep(animate){
+    if (isAnimating || hovering) return;
+    const mv = randomMove();
+    isAnimating = true;
+    rotateLayer(mv.axis, mv.layer, mv.dir, animate, () => {
+      isAnimating = false;
+      history.push(mv);
+    });
+  }
+
+  // initial scramble, instant
+  for (let i = 0; i < 16; i++) scrambleStep(false);
+
+  // keep gently scrambling while idle
+  const scrambleTimer = setInterval(() => scrambleStep(!reduce), 1100);
+
+  function solveStep(){
+    if (!hovering) return;
+    if (isAnimating){ setTimeout(solveStep, 40); return; }
+    if (history.length === 0) return; // fully solved — rest here
+    const mv = history.pop();
+    isAnimating = true;
+    rotateLayer(mv.axis, mv.layer, -mv.dir, true, () => {
+      isAnimating = false;
+      setTimeout(solveStep, 90);
+    });
+  }
+
+  stage.addEventListener('pointerenter', () => { hovering = true; solveStep(); });
+  stage.addEventListener('pointerleave', () => { hovering = false; });
+
+  // gentle overall viewing tilt/spin, independent of the layer turns above
   let ax = 22, ay = -30;
   function spin(){
-    ax += 0.28;
-    ay += 0.42;
+    if (!hovering){ ax += 0.12; ay += 0.18; }
     cube.style.transform = `rotateX(${ax}deg) rotateY(${ay}deg)`;
     requestAnimationFrame(spin);
   }
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce) spin();
   else cube.style.transform = 'rotateX(22deg) rotateY(-30deg)';
 })();
 
-/* ---------------- faint technical backdrop for the project section ---------------- */
+/* ---------------- faint technical backdrop for each project card ---------------- */
 (function(){
-  const el = document.getElementById('project-backdrop');
-  const tokens = ['ESP32-S3','CC1101','PN532','RFID','NFC','IR','RF','SUBGHZ','TX','RX','SPI','GPIO','KICAD','SIGNAL','CAPTURE','REPLAY'];
-  let out = '';
-  for (let i = 0; i < 140; i++){
-    out += tokens[Math.floor(Math.random()*tokens.length)] + '  ';
-  }
-  el.textContent = out;
+  document.querySelectorAll('.card-backdrop').forEach(el => {
+    const tokens = (el.dataset.tokens || '').split(',').filter(Boolean);
+    if (!tokens.length) return;
+    let out = '';
+    for (let i = 0; i < 60; i++){
+      out += tokens[Math.floor(Math.random()*tokens.length)] + '  ';
+    }
+    el.textContent = out;
+  });
 })();
 </script>
 
