@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsh Thorat</title>
+<meta name="description" content="Harsh Thorat — communication, cryptography, and PLATYPULSE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Devanagari:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f4ee;
+    --paper-2:#efece3;
+    --ink:#2c2b28;
+    --ink-soft:#5c5a54;
+    --line:#dcd8cb;
+    --teal:#5b7c72;
+    --clay:#b98a63;
+    --wave:#a9c0bb;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  #bg-canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  #wave-canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- nav ---------- */
+  nav.wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:34px;
+    padding-bottom:34px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+  }
+  nav a{ color:var(--ink-soft); text-decoration:none; }
+  nav a:hover{ color:var(--teal); }
+  nav .links a + a{ margin-left:18px; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:32px 0 64px;
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+  }
+
+  .name-cycle{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(40px, 8vw, 68px);
+    line-height:1.05;
+    margin:0;
+    min-height:1.2em;
+  }
+  .name-cycle .mr{
+    font-family:'Noto Sans Devanagari', 'Fraunces', serif;
+    font-weight:600;
+  }
+  .name-cycle span{
+    display:inline-block;
+    transition:opacity 0.5s ease;
+  }
+  .name-cycle span.fade{ opacity:0; }
+
+  .hero-row{
+    display:flex;
+    gap:34px;
+    align-items:flex-start;
+    flex-wrap:wrap-reverse;
+    margin-top:22px;
+  }
+
+  .hero-text{
+    flex:1 1 320px;
+    font-size:16.5px;
+  }
+  .hero-text p{ margin:0 0 14px; }
+
+  .photo-frame{
+    flex:0 0 auto;
+    width:220px;
+  }
+  .photo-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
+  .photo-caption{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    padding-top:8px;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- sections ---------- */
+  section{
+    padding:46px 0;
+    border-top:1px solid var(--line);
+  }
+
+  h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:23px;
+    margin:0 0 18px;
+  }
+
+  section p{
+    margin:0 0 14px;
+    max-width:64ch;
+    font-size:16px;
+  }
+
+  /* ---------- project ---------- */
+  .project{
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .project-backdrop{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    line-height:3.4;
+    color:var(--ink-soft);
+    opacity:0.06;
+    color:var(--line);
+    white-space:pre-wrap;
+    word-break:break-all;
+    padding:6px;
+    pointer-events:none;
+    user-select:none;
+  }
+  .project-inner{
+    position:relative;
+    z-index:1;
+  }
+  .project-name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--clay);
+    letter-spacing:0.02em;
+    margin-bottom:8px;
+    display:block;
+  }
+  .project-links{
+    margin-top:18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13.5px;
+  }
+  .project-links a{
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid var(--wave);
+  }
+  .project-links a:hover{ color:var(--ink); border-color:var(--ink); }
+
+  /* ---------- links / footer ---------- */
+  .link-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    margin-top:6px;
+  }
+  .link-list a{
+    color:var(--ink);
+    text-decoration:none;
+    padding-bottom:2px;
+    border-bottom:1px solid var(--line);
+  }
+  .link-list a:hover{ border-color:var(--teal); color:var(--teal); }
+
+  footer{
+    padding:26px 0 100px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
+  footer p{ margin:0; }
+
+  /* ---------- cube ---------- */
+  #cube-stage{
+    position:fixed;
+    right:26px;
+    bottom:26px;
+    width:74px;
+    height:74px;
+    z-index:5;
+    perspective:400px;
+    pointer-events:none;
+  }
+  #cube{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+  }
+  .face{
+    position:absolute;
+    width:74px;
+    height:74px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(3,1fr);
+    gap:2px;
+    padding:3px;
+    background:#2c2b28;
+    box-shadow:0 4px 10px rgba(44,43,40,0.1);
+  }
+  .face div{ border-radius:1px; }
+  .f-front{ transform:translateZ(37px); }
+  .f-back{  transform:rotateY(180deg) translateZ(37px); }
+  .f-right{ transform:rotateY(90deg) translateZ(37px); }
+  .f-left{  transform:rotateY(-90deg) translateZ(37px); }
+  .f-top{   transform:rotateX(90deg) translateZ(37px); }
+  .f-bottom{transform:rotateX(-90deg) translateZ(37px); }
+
+  @media (max-width:600px){
+    #cube-stage{ width:52px; height:52px; right:16px; bottom:16px; }
+    #cube{ }
+    .face{ width:52px; height:52px; }
+    .f-front,.f-back,.f-right,.f-left,.f-top,.f-bottom{ }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #cube{ animation:none !important; }
+    .name-cycle span{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="wave-canvas"></canvas>
+
+<main>
+  <nav class="wrap">
+    <span>harsh thorat</span>
+    <span class="links">
+      <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">github</a><a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">linkedin</a><a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">x</a>
+    </span>
+  </nav>
+
+  <div class="wrap hero">
+    <div>
+      <h1 class="name-cycle"><span id="name-slot">हर्ष थोरात</span></h1>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-text">
+        <p>I've always wanted to know what's actually happening underneath things — that's probably why electrical engineering felt like the right place to start, and why a minor in quantum technology keeps handing me stranger questions than I bargained for. Lately I can't stop poking at communication and cryptography: how a signal actually gets from one place to another, and how much of it can be hidden in plain sight.</p>
+        <p>I solve cubes to keep my hands busy while my head works on something else, and most of what I build starts the same way — with a "wait, how does that even work?" I can't quite let go of.</p>
+      </div>
+      <div>
+        <div class="photo-frame">
+          <img src="assets/harsh.jpg" alt="Harsh as a kid, sitting on a scooter" loading="lazy">
+        </div>
+        <div class="photo-caption">15 · 09 · 09</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap project" id="project">
+    <div class="project-backdrop" aria-hidden="true" id="project-backdrop"></div>
+    <div class="project-inner">
+      <span class="project-name">PLATYPULSE</span>
+      <h2>one board, three wireless worlds</h2>
+      <p>PLATYPULSE is a unified handheld I've been building with a teammate under SRA-VJTI's Eklavya program — the kind of thing I keep coming back to because it sits exactly where my interests overlap. RF, RFID/NFC, and IR each speak their own language and usually need their own separate tool to work with; PLATYPULSE brings all three into one board so you can capture, analyze, store, and replay signals from a single interface instead of juggling three.</p>
+      <p>It borrows a fair bit of its spirit from the Flipper Zero, but the point was never to clone it — it was to actually understand what happens when a signal is caught, held, and sent back out again, down at the hardware and firmware level. That's the part that ties back to everything else I care about: communication as a practical, physical thing, and cryptography as the question of what a captured signal can, or can't, be made to reveal.</p>
+      <div class="project-links">
+        <a href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">view the repo →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="links">
+    <h2>elsewhere</h2>
+    <div class="link-list">
+      <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">X</a>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    © 2026 harsh thorat
+  </footer>
+</main>
+
+<div id="cube-stage">
+  <div id="cube">
+    <div class="face f-front"></div>
+    <div class="face f-back"></div>
+    <div class="face f-right"></div>
+    <div class="face f-left"></div>
+    <div class="face f-top"></div>
+    <div class="face f-bottom"></div>
+  </div>
+</div>
+
+<script>
+/* ---------------- name cycle: marathi <-> english ---------------- */
+(function(){
+  const el = document.getElementById('name-slot');
+  const forms = [
+    { text: 'हर्ष थोरात', cls: 'mr' },
+    { text: 'Harsh Thorat', cls: '' }
+  ];
+  let i = 0;
+  setInterval(() => {
+    el.classList.add('fade');
+    setTimeout(() => {
+      i = (i + 1) % forms.length;
+      el.textContent = forms[i].text;
+      el.className = forms[i].cls;
+      el.classList.add('fade');
+      requestAnimationFrame(() => el.classList.remove('fade'));
+    }, 500);
+  }, 3200);
+})();
+
+/* ---------------- calm background: dot grid + drifting signal traces ---------------- */
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr, dotPattern;
+
+  function buildDotPattern(){
+    const spacing = 30;
+    const tile = document.createElement('canvas');
+    tile.width = spacing; tile.height = spacing;
+    const tctx = tile.getContext('2d');
+    tctx.fillStyle = 'rgba(44,43,40,0.28)';
+    tctx.beginPath();
+    tctx.arc(spacing/2, spacing/2, 1.1, 0, Math.PI*2);
+    tctx.fill();
+    dotPattern = ctx.createPattern(tile, 'repeat');
+  }
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    buildDotPattern();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const waves = [
+    { yr:0.20, amp:22, freq:0.0032, speed:0.10, color:'91,124,114'  },
+    { yr:0.52, amp:16, freq:0.0048, speed:-0.07, color:'185,138,99'  },
+    { yr:0.82, amp:24, freq:0.0026, speed:0.06,  color:'91,124,114'  }
+  ];
+
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+
+    ctx.globalAlpha = 0.7;
+    ctx.fillStyle = dotPattern;
+    ctx.fillRect(0,0,w,h);
+    ctx.globalAlpha = 1;
+
+    waves.forEach(wv => {
+      const yBase = h * wv.yr;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 8){
+        const y = yBase + Math.sin(x*wv.freq + t*wv.speed) * wv.amp;
+        if (x === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = `rgba(${wv.color},0.13)`;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+
+    if (!reduce) t += 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------------- calm ripple wave that follows the cursor ---------------- */
+(function(){
+  const canvas = document.getElementById('wave-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr;
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let mx = w/2, my = h/2, tx = mx, ty = my;
+  let active = false;
+  window.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY; active = true;
+  });
+  window.addEventListener('mouseleave', () => { active = false; });
+
+  const ripples = [];
+  window.addEventListener('mousemove', e => {
+    if (Math.random() < 0.1) {
+      ripples.push({ x: e.clientX, y: e.clientY, r: 0, a: 0.1 });
+    }
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    mx += (tx - mx) * 0.06;
+    my += (ty - my) * 0.06;
+
+    // calm, single soft ring around the cursor
+    if (active) {
+      ctx.beginPath();
+      ctx.arc(mx, my, 46, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(169,192,187,0.16)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    for (let i = ripples.length - 1; i >= 0; i--){
+      const rp = ripples[i];
+      rp.r += 1.6;
+      rp.a *= 0.965;
+      if (rp.a < 0.004){ ripples.splice(i,1); continue; }
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(91,124,114,${rp.a})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------------- continuously "solving" rubik's cube ---------------- */
+(function(){
+  const cube = document.getElementById('cube');
+  const colors = ['#c94f3d', '#e8a13c', '#4f7f5c', '#f0e4c3', '#5b7c99', '#e9e5da']; // calm-ish cube palette
+
+  const faces = document.querySelectorAll('.face');
+  function paintFace(face){
+    face.innerHTML = '';
+    const base = colors[Math.floor(Math.random()*colors.length)];
+    for (let i = 0; i < 9; i++){
+      const sticker = document.createElement('div');
+      sticker.style.background = Math.random() < 0.72 ? base : colors[Math.floor(Math.random()*colors.length)];
+      face.appendChild(sticker);
+    }
+  }
+  faces.forEach(paintFace);
+
+  // reshuffle a random face every so often to feel like a move being made
+  setInterval(() => {
+    const f = faces[Math.floor(Math.random()*faces.length)];
+    paintFace(f);
+  }, 1400);
+
+  // continuous, never-resting rotation — always mid-solve
+  let ax = 22, ay = -30;
+  function spin(){
+    ax += 0.28;
+    ay += 0.42;
+    cube.style.transform = `rotateX(${ax}deg) rotateY(${ay}deg)`;
+    requestAnimationFrame(spin);
+  }
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) spin();
+  else cube.style.transform = 'rotateX(22deg) rotateY(-30deg)';
+})();
+
+/* ---------------- faint technical backdrop for the project section ---------------- */
+(function(){
+  const el = document.getElementById('project-backdrop');
+  const tokens = ['ESP32-S3','CC1101','PN532','RFID','NFC','IR','RF','SUBGHZ','TX','RX','SPI','GPIO','KICAD','SIGNAL','CAPTURE','REPLAY'];
+  let out = '';
+  for (let i = 0; i < 140; i++){
+    out += tokens[Math.floor(Math.random()*tokens.length)] + '  ';
+  }
+  el.textContent = out;
+})();
+</script>
+
+</body>
+</html>
