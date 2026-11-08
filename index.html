@@ -2,705 +2,272 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece5d4">
 <title>Harsh Thorat</title>
-<meta name="description" content="Harsh Thorat — communication, cryptography, PLATYPULSE, and GantryMate-200."><link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="description" content="Harsh Thorat. Electrical Engineering student interested in wireless communication and electronics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Devanagari:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Noto+Sans+Devanagari:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#f6f4ee;
-    --paper-2:#efece3;
-    --ink:#2c2b28;
-    --ink-soft:#5c5a54;
-    --line:#dcd8cb;
-    --teal:#5b7c72;
-    --clay:#b98a63;
-    --wave:#a9c0bb;
-  }
+:root{
+  --oat:#ece5d4;
+  --pine:#1d3a2d;
+  --muted:#5b7165;
+  --line:rgba(29,58,45,.16);
+  --lilac:#d6caf0;
+  --live:#8c74c7;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--oat);color:var(--pine);font:17px/1.65 Inter,sans-serif;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lilac)}
+.wrap{max-width:620px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration-color:var(--line);text-underline-offset:4px}
+a:hover{background:var(--lilac);text-decoration-color:var(--pine)}
+a:focus-visible{outline:2px solid var(--live);outline-offset:3px}
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+nav{display:flex;justify-content:flex-end;gap:22px;padding-top:36px;font-size:14px;color:var(--muted)}
+nav a{text-decoration:none}
 
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
+h1{font:500 clamp(44px,10vw,72px)/1.05 Fraunces,serif;letter-spacing:-.025em;margin:72px 0 36px;min-height:1.1em}
+h1 span{display:inline-block;transition:opacity .7s var(--ease),filter .7s var(--ease)}
+h1 span.fade{opacity:0;filter:blur(4px)}
+h1 .mr{font-family:'Noto Sans Devanagari',Fraunces,serif}
 
-  #bg-canvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    pointer-events:none;
-  }
+.about::after{content:"";display:block;clear:both}
+.about p{margin:0 0 1em}
+.about img{float:right;width:150px;height:auto;margin:6px 0 12px 28px;border-radius:3px;display:block}
 
-  #wave-canvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    pointer-events:none;
-  }
+h2{font:400 14px/1 Inter,sans-serif;color:var(--muted);margin:80px 0 0;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.proj{padding:26px 0;border-bottom:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+h3{font:500 24px/1.2 Fraunces,serif;letter-spacing:-.01em;margin:0}
+h3 a{text-decoration:none}
+.st{font-size:13px;color:var(--muted);white-space:nowrap}
+.proj p{margin:12px 0 0;color:var(--muted);font-size:16px;max-width:54ch}
 
-  main{
-    position:relative;
-    z-index:1;
-  }
+footer{padding:56px 0 120px;font-size:13px;color:var(--muted)}
 
-  .wrap{
-    max-width:760px;
-    margin:0 auto;
-    padding:0 28px;
-  }
+/* cube */
+:root{--sz:70px;--ps:3.4;--edge:26px}
+body.play{overflow:hidden}
+#cube-stage{position:fixed;right:var(--edge);bottom:var(--edge);width:var(--sz);height:var(--sz);z-index:6;perspective:420px;cursor:pointer;touch-action:none;
+transition:right .8s var(--ease),bottom .8s var(--ease),transform .8s var(--ease)}
+body.play #cube-stage{right:calc(50% - var(--sz)/2);bottom:calc(58% - var(--sz)/2);transform:scale(var(--ps));cursor:grab}
+#cube{width:100%;height:100%;position:relative;transform-style:preserve-3d}
+.cubelet,.cubelet-inner,.layer-wrap{position:absolute;transform-style:preserve-3d}
+.cubelet-inner,.layer-wrap{inset:0}
+.sticker{position:absolute;inset:0;border-radius:3px;box-shadow:inset 0 0 0 2px #14201a}
+#cap{position:fixed;right:var(--edge);bottom:calc(var(--edge) + var(--sz) + 6px);font-size:11px;color:var(--muted);transition:opacity .3s;pointer-events:none}
+body.play #cap{opacity:0}
 
-  /* ---------- nav ---------- */
-  nav.wrap{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-top:34px;
-    padding-bottom:34px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.02em;
-    color:var(--ink-soft);
-  }
-  nav a{ color:var(--ink-soft); text-decoration:none; }
-  nav a:hover{ color:var(--teal); }
-  nav .links a + a{ margin-left:18px; }
+/* play overlay */
+#play{position:fixed;inset:0;z-index:5;background:rgba(236,229,212,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 20px 34px;opacity:0;visibility:hidden;touch-action:none;
+transition:opacity .5s var(--ease),visibility .5s}
+body.play #play{opacity:1;visibility:visible}
+.hint{font-size:13px;color:var(--muted);margin:0 0 16px;text-align:center;max-width:38ch}
+.moves{display:grid;grid-template-columns:repeat(6,46px);gap:8px;margin-bottom:12px}
+#play button{font:500 14px Inter,sans-serif;color:var(--pine);background:transparent;border:1px solid var(--line);border-radius:10px;height:44px;cursor:pointer;
+transition:background .25s,border-color .25s,transform .25s var(--ease)}
+#play button:hover{background:var(--lilac);border-color:var(--live)}
+#play button:active{transform:scale(.94)}
+#play button:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+.row{display:flex;gap:8px}
+.row button{padding:0 22px}
+#sol{background:var(--pine);color:var(--oat);border-color:var(--pine)}
+#sol:hover{background:var(--live);border-color:var(--live);color:#fff}
 
-  /* ---------- hero ---------- */
-  .hero{
-    padding:32px 0 64px;
-    display:flex;
-    flex-direction:column;
-    gap:36px;
-  }
-
-  .name-cycle{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:clamp(40px, 8vw, 68px);
-    line-height:1.05;
-    margin:0;
-    min-height:1.2em;
-  }
-  .name-cycle .mr{
-    font-family:'Noto Sans Devanagari', 'Fraunces', serif;
-    font-weight:600;
-  }
-  .name-cycle span{
-    display:inline-block;
-    transition:opacity 0.5s ease;
-  }
-  .name-cycle span.fade{ opacity:0; }
-
-  .hero-row{
-    display:flex;
-    gap:34px;
-    align-items:flex-start;
-    flex-wrap:wrap-reverse;
-    margin-top:22px;
-  }
-
-  .hero-text{
-    flex:1 1 320px;
-    font-size:16.5px;
-  }
-  .hero-text p{ margin:0 0 14px; }
-
-  .photo-frame{
-    flex:0 0 auto;
-    width:220px;
-    border-radius:3px;
-    overflow:hidden;
-    border:1px solid var(--line);
-  }
-  .photo-frame img{
-    display:block;
-    width:100%;
-    height:auto;
-    object-fit:contain;
-  }
-
-  .eyebrow{
-    display:block;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin-bottom:16px;
-  }
-
-  /* ---------- sections ---------- */
-  section{
-    padding:52px 0;
-    border-top:1px solid var(--line);
-  }
-
-  h2{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:23px;
-    margin:0 0 18px;
-  }
-
-  section p{
-    margin:0 0 14px;
-    max-width:64ch;
-    font-size:16px;
-  }
-
-  /* ---------- projects ---------- */
-  .project-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-  }
-  .project-card{
-    position:relative;
-    display:block;
-    overflow:hidden;
-    padding:22px 22px 24px;
-    background:var(--paper-2);
-    border:1px solid var(--line);
-    border-radius:6px;
-    text-decoration:none;
-    color:inherit;
-    transition:transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  }
-  .project-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 24px rgba(44,43,40,0.08);
-    border-color:var(--teal);
-  }
-  .card-backdrop{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    letter-spacing:0.1em;
-    line-height:3.6;
-    color:var(--line);
-    opacity:0.65;
-    white-space:pre-wrap;
-    word-break:break-all;
-    padding:4px;
-    pointer-events:none;
-    user-select:none;
-  }
-  .card-body{ position:relative; z-index:1; }
-  .card-tag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--clay);
-    letter-spacing:0.02em;
-    display:block;
-    margin-bottom:10px;
-  }
-  .project-card h3{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:19px;
-    margin:0 0 10px;
-  }
-  .project-card p{
-    font-size:14.5px;
-    color:var(--ink-soft);
-    margin:0 0 16px;
-    max-width:none;
-  }
-  .card-link{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    color:var(--teal);
-  }
-  .project-card:hover .card-link{ color:var(--ink); }
-
-  @media (max-width:640px){
-    .project-grid{ grid-template-columns:1fr; }
-  }
-
-  /* ---------- links / footer ---------- */
-  .link-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px 26px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:14.5px;
-    margin-top:6px;
-  }
-  .link-list a{
-    color:var(--ink);
-    text-decoration:none;
-    padding-bottom:2px;
-    border-bottom:1px solid var(--line);
-  }
-  .link-list a:hover{ border-color:var(--teal); color:var(--teal); }
-
-  footer{
-    padding:26px 0 100px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    color:var(--ink-soft);
-    border-top:1px solid var(--line);
-  }
-  footer p{ margin:0; }
-
-  /* ---------- cube ---------- */
-  #cube-stage{
-    position:fixed;
-    right:26px;
-    bottom:26px;
-    width:74px;
-    height:74px;
-    z-index:5;
-    perspective:420px;
-    pointer-events:auto;
-    cursor:default;
-  }
-  #cube{
-    width:100%;
-    height:100%;
-    position:relative;
-    transform-style:preserve-3d;
-  }
-  .cubelet{
-    position:absolute;
-    transform-style:preserve-3d;
-  }
-  .cubelet-inner{
-    position:absolute;
-    inset:0;
-    transform-style:preserve-3d;
-  }
-  .layer-wrap{
-    position:absolute;
-    inset:0;
-    transform-style:preserve-3d;
-  }
-  .sticker{
-    position:absolute;
-    inset:0;
-    border-radius:2px;
-    box-shadow:inset 0 0 0 1px rgba(44,43,40,0.35);
-  }
-
-  @media (max-width:600px){
-    #cube-stage{ width:52px; height:52px; right:16px; bottom:16px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .name-cycle span{ transition:none; }
-  }
+@media(max-width:560px){
+  h1{margin-top:48px}
+  .about img{float:none;margin:8px 0 0;width:140px}
+  .head{flex-direction:column;gap:6px}
+  :root{--sz:50px;--ps:4.4;--edge:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  h1 span,#cube-stage,#play{transition:none}
+}
 </style>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
-<canvas id="wave-canvas"></canvas>
-
-<main>
-  <nav class="wrap">
-    <span>harsh thorat</span>
-    <span class="links">
-      <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">github</a><a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">linkedin</a><a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">x</a>
-    </span>
+<div class="wrap">
+  <nav>
+    <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">github</a>
+    <a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">linkedin</a>
+    <a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">x</a>
   </nav>
 
-  <div class="wrap hero">
-    <div>
-      <h1 class="name-cycle"><span id="name-slot">हर्ष थोरात</span></h1>
-    </div>
+  <h1><span id="name-slot">हर्ष थोरात</span></h1>
 
-    <div class="hero-row">
-      <div class="hero-text">
-        <p>I'm an Electrical Engineering student with a minor in Quantum Technology and a naturally curious mind. I enjoy exploring how things work and turning ideas into things I can build. Over time, I've found myself increasingly interested in communication, cryptography, and electronics — mostly because there's always something new to uncover.</p>
-        <p>Outside of engineering, I'm a speedcuber. I enjoy the mix of pattern recognition, problem-solving, and the satisfaction of taking something scrambled and working out the path back to solved.</p>
-      </div>
-      <div>
-        <div class="photo-frame">
-          <img src="assets/harsh.jpg" alt="Harsh as a kid, sitting on a scooter" loading="lazy">
-        </div>
-      </div>
-    </div>
+  <div class="about">
+    <img src="assets/harsh.jpg" alt="Harsh as a kid, sitting on a scooter">
+    <p>I'm an Electrical Engineering student with a minor in Quantum Technology. I'm interested in wireless communication and electronics, and I'm trying to learn many things.</p>
+    <p>I'm also a speedcuber.</p>
   </div>
 
-  <section class="wrap" id="projects">
-    <span class="eyebrow">projects</span>
-    <div class="project-grid">
-      <a class="project-card" href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">
-        <div class="card-backdrop" data-tokens="ESP32-S3,CC1101,PN532,RFID,NFC,IR,RF,SUBGHZ,TX,RX,SPI,GPIO"></div>
-        <div class="card-body">
-          <span class="card-tag">01</span>
-          <h3>PLATYPULSE</h3>
-          <p>A unified handheld built around the ESP32-S3 that brings RF, RFID/NFC, and IR into one interface — capture, analyze, store, and transmit signals without juggling three separate tools.</p>
-          <span class="card-link">view repo →</span>
-        </div>
-      </a>
-      <a class="project-card" href="https://github.com/harshthorat-cpu/Eklavya_Gantry" target="_blank" rel="noopener">
-        <div class="card-backdrop" data-tokens="ESP32,DRV8825,NEMA17,GANTRY,STEPPER,KICAD,ONSHAPE,XYZ"></div>
-        <div class="card-body">
-          <span class="card-tag">02</span>
-          <h3>GantryMate‑200</h3>
-          <p>An automated 3-axis gantry that screws and unscrews miniature 1mm screws on delicate LED panels — sub-millimeter accuracy, built for speed around sensitive circuitry.</p>
-          <span class="card-link">view repo →</span>
-        </div>
-      </a>
+  <h2>Now</h2>
+  <article class="proj">
+    <div class="head">
+      <h3><a href="https://github.com/harshthorat-cpu?tab=repositories" target="_blank" rel="noopener">Silent Ack</a></h3>
+      <span class="st">in progress</span>
     </div>
-  </section>
-
-  <section class="wrap" id="links">
-    <span class="eyebrow">elsewhere</span>
-    <div class="link-list">
-      <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">X</a>
+    <p>Measures the round-trip time of WhatsApp delivery receipts in your own "Message yourself" chat. A companion client reacts to one pinned anchor message, the phone acknowledges it, and the time between the two is the RTT. The recipient is always the account itself, so it's a measurement tool for devices you own.</p>
+  </article>
+  <article class="proj">
+    <div class="head">
+      <h3><a href="https://github.com/harshthorat-cpu/Noema" target="_blank" rel="noopener">Noema</a></h3>
     </div>
-  </section>
+    <p>Reinforcement learning where the agent never sees the state. The environment encrypts each state before the agent gets it, so the agent isn't looking at a grid, a pixel, or a coordinate. It's looking at ciphertext, and if you printed one of its observations you'd see noise.</p>
+  </article>
+  <article class="proj">
+    <div class="head">
+      <h3><a href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">PLATYPULSE</a></h3>
+    </div>
+    <p>A unified handheld built around the ESP32-S3 that brings RF, RFID/NFC, and IR into one interface: capture, analyze, store, and transmit signals without juggling three separate tools.</p>
+  </article>
+  <article class="proj">
+    <div class="head">
+      <h3><a href="https://github.com/harshthorat-cpu/Eklavya_Gantry" target="_blank" rel="noopener">GantryMate‑200</a></h3>
+    </div>
+    <p>A 3-axis gantry that screws and unscrews about 280 miniature 1 mm screws on a two-layer LED panel: 200 on the top layer, 80 below. ESP32, DRV8825 drivers and NEMA 17 motors, plus a custom toolhead. The target is sub-millimeter positioning and under 5 seconds per screw. A team build with SRA-VJTI.</p>
+  </article>
 
-  <footer class="wrap">
-    © 2026 harsh thorat
-  </footer>
-</main>
-
-<div id="cube-stage" title="hover to solve">
-  <div id="cube"></div>
+  <footer>© 2026 Harsh Thorat</footer>
 </div>
 
+<div id="play" aria-hidden="true">
+  <p class="hint">Drag to turn the view. Tap a move, or press u d l r f b on a keyboard (hold shift to reverse).</p>
+  <div class="moves" id="moves"></div>
+  <div class="row"><button id="scr">Scramble</button><button id="sol">Solve</button><button id="cls">Close</button></div>
+</div>
+<div id="cap">click to play</div>
+<div id="cube-stage" role="button" tabindex="0" aria-label="Play with the Rubik's cube" title="hover: it solves itself. click: play"><div id="cube"></div></div>
+
 <script>
-/* ---------------- name cycle: marathi <-> english ---------------- */
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* name: marathi <-> english */
 (function(){
-  const el = document.getElementById('name-slot');
-  const forms = [
-    { text: 'हर्ष थोरात', cls: 'mr' },
-    { text: 'Harsh Thorat', cls: '' }
-  ];
-  let i = 0;
-  setInterval(() => {
-    el.classList.add('fade');
-    setTimeout(() => {
-      i = (i + 1) % forms.length;
-      el.textContent = forms[i].text;
-      el.className = forms[i].cls;
-      el.classList.add('fade');
-      requestAnimationFrame(() => el.classList.remove('fade'));
-    }, 500);
-  }, 3200);
+  const el=document.getElementById('name-slot'),f=[['हर्ष थोरात','mr'],['Harsh Thorat','']];let i=0;
+  setInterval(()=>{el.classList.add('fade');setTimeout(()=>{i=(i+1)%2;el.textContent=f[i][0];el.className=f[i][1]+' fade';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('fade')))},700)},3800);
 })();
 
-/* ---------------- calm background: dot grid + drifting signal traces ---------------- */
+/* cube: idles scrambled, solves on hover, playable on click */
 (function(){
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr, dotPattern;
-
-  function buildDotPattern(){
-    const spacing = 30;
-    const tile = document.createElement('canvas');
-    tile.width = spacing; tile.height = spacing;
-    const tctx = tile.getContext('2d');
-    tctx.fillStyle = 'rgba(44,43,40,0.28)';
-    tctx.beginPath();
-    tctx.arc(spacing/2, spacing/2, 1.1, 0, Math.PI*2);
-    tctx.fill();
-    dotPattern = ctx.createPattern(tile, 'repeat');
+  const st=document.getElementById('cube-stage'),cu=document.getElementById('cube'),play=document.getElementById('play');
+  const S=innerWidth<560?14:20,SP=S+1,H=S/2,DK='#14201a';
+  const C={front:'#12b349',back:'#1e5bff',right:'#e11d2e',left:'#ff7a00',top:'#fafafa',bottom:'#ffd400'};
+  const T={front:`translateZ(${H}px)`,back:`rotateY(180deg) translateZ(${H}px)`,right:`rotateY(90deg) translateZ(${H}px)`,
+    left:`rotateY(-90deg) translateZ(${H}px)`,top:`rotateX(90deg) translateZ(${H}px)`,bottom:`rotateX(-90deg) translateZ(${H}px)`};
+  const L=[];
+  for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){
+    const o=document.createElement('div');o.className='cubelet';
+    o.style.cssText=`width:${S}px;height:${S}px;left:50%;top:50%;margin:${-H}px 0 0 ${-H}px;transform:translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;
+    const n=document.createElement('div');n.className='cubelet-inner';
+    const ext={front:z===1,back:z===-1,right:x===1,left:x===-1,top:y===-1,bottom:y===1};
+    for(const f in T){const e=document.createElement('div');e.className='sticker';e.style.background=ext[f]?C[f]:DK;e.style.transform=T[f];n.appendChild(e)}
+    o.appendChild(n);cu.appendChild(o);L.push({o,n,x,y,z,r:''});
   }
-
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth; h = window.innerHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    buildDotPattern();
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const waves = [
-    { yr:0.20, amp:22, freq:0.0032, speed:0.10, color:'91,124,114'  },
-    { yr:0.52, amp:16, freq:0.0048, speed:-0.07, color:'185,138,99'  },
-    { yr:0.82, amp:24, freq:0.0026, speed:0.06,  color:'91,124,114'  }
-  ];
-
-  let t = 0;
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-
-    ctx.globalAlpha = 0.7;
-    ctx.fillStyle = dotPattern;
-    ctx.fillRect(0,0,w,h);
-    ctx.globalAlpha = 1;
-
-    waves.forEach(wv => {
-      const yBase = h * wv.yr;
-      ctx.beginPath();
-      for (let x = 0; x <= w; x += 8){
-        const y = yBase + Math.sin(x*wv.freq + t*wv.speed) * wv.amp;
-        if (x === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-      }
-      ctx.strokeStyle = `rgba(${wv.color},0.13)`;
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
-    });
-
-    if (!reduce) t += 1;
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ---------------- calm ripple wave that follows the cursor ---------------- */
-(function(){
-  const canvas = document.getElementById('wave-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr;
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth; h = window.innerHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  let mx = w/2, my = h/2, tx = mx, ty = my;
-  let active = false;
-  window.addEventListener('mousemove', e => {
-    tx = e.clientX; ty = e.clientY; active = true;
-  });
-  window.addEventListener('mouseleave', () => { active = false; });
-
-  const ripples = [];
-  window.addEventListener('mousemove', e => {
-    if (Math.random() < 0.1) {
-      ripples.push({ x: e.clientX, y: e.clientY, r: 0, a: 0.1 });
+  function turn(ax,ly,d,anim,done,ms){
+    ms=ms||380;
+    const g=L.filter(c=>c[ax]===ly),A=ax.toUpperCase();
+    function fin(){
+      g.forEach(c=>{let{x,y,z}=c;
+        if(ax==='x'){y=-c.z*d;z=c.y*d}else if(ax==='y'){x=c.z*d;z=-c.x*d}else{x=-c.y*d;y=c.x*d}
+        c.x=x;c.y=y;c.z=z;c.r=`rotate${A}(${90*d}deg) ${c.r}`.trim();
+        c.o.style.transform=`translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;c.n.style.transform=c.r});
+      done&&done();
     }
+    if(!anim||rm){fin();return}
+    const w=document.createElement('div');w.className='layer-wrap';cu.appendChild(w);g.forEach(c=>w.appendChild(c.o));
+    w.getBoundingClientRect();
+    w.style.transition=`transform ${ms}ms cubic-bezier(.45,.05,.2,1)`;w.style.transform=`rotate${A}(${90*d}deg)`;
+    let ok=false;const end=()=>{if(ok)return;ok=true;g.forEach(c=>cu.appendChild(c.o));w.remove();fin()};
+    w.addEventListener('transitionend',end,{once:true});setTimeout(end,ms+100);
+  }
+
+  /* standard notation, clockwise as seen looking at that face */
+  const MV={U:['y',-1,-1],D:['y',1,1],L:['x',-1,1],R:['x',1,-1],F:['z',1,1],B:['z',-1,-1]};
+  const AX=['x','y','z'],LY=[-1,0,1];
+  const rand=()=>({ax:AX[Math.random()*3|0],ly:LY[Math.random()*3|0],d:Math.random()<.5?1:-1});
+  const hist=[],queue=[];
+  let busy=false,hov=false,playing=false,solving=false;
+
+  function record(m){const l=hist[hist.length-1];
+    if(l&&l.ax===m.ax&&l.ly===m.ly&&l.d===-m.d)hist.pop();else hist.push(m)}
+  function pump(){
+    if(busy||!queue.length)return;
+    const q=queue.shift();busy=true;
+    turn(q.ax,q.ly,q.d,true,()=>{busy=false;record(q);pump()},q.ms);
+  }
+  function solveStep(ms){
+    if(busy){setTimeout(()=>solveStep(ms),30);return}
+    if(!hist.length||(!hov&&!playing)){solving=false;return}
+    const m=hist.pop();busy=true;
+    turn(m.ax,m.ly,-m.d,true,()=>{busy=false;solveStep(ms)},ms);
+  }
+  function startSolve(ms){if(solving)return;queue.length=0;solving=true;solveStep(ms)}
+  function userMove(name,prime){
+    if(solving||queue.length>12)return;
+    const[ax,ly,d]=MV[name];queue.push({ax,ly,d:prime?-d:d,ms:220});pump();
+  }
+  function scramble(){
+    if(solving)return;
+    for(let i=0;i<20;i++){const m=rand();m.ms=140;queue.push(m)}
+    pump();
+  }
+
+  for(let i=0;i<16;i++){const m=rand();turn(m.ax,m.ly,m.d,false);record(m)}
+  setInterval(()=>{
+    if(busy||hov||playing||solving||queue.length)return;
+    const m=rand();m.ms=380;queue.push(m);pump();
+  },1400);
+
+  st.addEventListener('pointerenter',()=>{if(playing)return;hov=true;startSolve(380)});
+  st.addEventListener('pointerleave',()=>{hov=false});
+
+  const mv=document.getElementById('moves');
+  ['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-label',n+' clockwise');b.onclick=()=>userMove(n,false);mv.appendChild(b)});
+  ['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n+'\u2032';b.setAttribute('aria-label',n+' counterclockwise');b.onclick=()=>userMove(n,true);mv.appendChild(b)});
+  document.getElementById('scr').onclick=scramble;
+  document.getElementById('sol').onclick=()=>startSolve(150);
+  function open(){
+    if(playing)return;
+    playing=true;hov=false;document.body.classList.add('play');play.setAttribute('aria-hidden','false');
+    if(hist.length<6&&!solving)scramble();
+  }
+  function close(){playing=false;document.body.classList.remove('play');play.setAttribute('aria-hidden','true')}
+  document.getElementById('cls').onclick=close;
+  st.addEventListener('click',open);
+  st.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+  window.addEventListener('keydown',e=>{
+    if(!playing)return;
+    if(e.key==='Escape'){close();return}
+    const k=e.key.toUpperCase();
+    if(MV[k]&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();userMove(k,e.key===k&&e.key!==e.key.toLowerCase())}
   });
 
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    mx += (tx - mx) * 0.06;
-    my += (ty - my) * 0.06;
-
-    // calm, single soft ring around the cursor
-    if (active) {
-      ctx.beginPath();
-      ctx.arc(mx, my, 46, 0, Math.PI*2);
-      ctx.strokeStyle = 'rgba(169,192,187,0.16)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    for (let i = ripples.length - 1; i >= 0; i--){
-      const rp = ripples[i];
-      rp.r += 1.6;
-      rp.a *= 0.965;
-      if (rp.a < 0.004){ ripples.splice(i,1); continue; }
-      ctx.beginPath();
-      ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(91,124,114,${rp.a})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ---------------- real 3x3x3 rubik's cube: scrambles idly, actually solves on hover ---------------- */
-(function(){
-  const stage = document.getElementById('cube-stage');
-  const cube = document.getElementById('cube');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isSmall = window.matchMedia('(max-width:600px)').matches;
-
-  const SIZE = isSmall ? 15 : 21;      // cubelet edge length
-  const GAP = 2;
-  const SPACING = SIZE + GAP;          // distance between cubelet centers
-  const HALF = SIZE / 2;
-
-  const COLORS = {
-    front:  '#4f7f5c',
-    back:   '#5b7c99',
-    right:  '#c94f3d',
-    left:   '#e8a13c',
-    top:    '#f0e4c3',
-    bottom: '#e0c34a'
-  };
-  const FACE_TRANSFORM = {
-    front:  `translateZ(${HALF}px)`,
-    back:   `rotateY(180deg) translateZ(${HALF}px)`,
-    right:  `rotateY(90deg) translateZ(${HALF}px)`,
-    left:   `rotateY(-90deg) translateZ(${HALF}px)`,
-    top:    `rotateX(90deg) translateZ(${HALF}px)`,
-    bottom: `rotateX(-90deg) translateZ(${HALF}px)`
-  };
-  const AXIS_LETTER = { x:'X', y:'Y', z:'Z' };
-
-  // build 27 cubelets
-  const cubelets = [];
-  for (let x = -1; x <= 1; x++){
-    for (let y = -1; y <= 1; y++){
-      for (let z = -1; z <= 1; z++){
-        const outer = document.createElement('div');
-        outer.className = 'cubelet';
-        outer.style.width = SIZE + 'px';
-        outer.style.height = SIZE + 'px';
-        outer.style.left = '50%';
-        outer.style.top = '50%';
-        outer.style.marginLeft = (-HALF) + 'px';
-        outer.style.marginTop = (-HALF) + 'px';
-        outer.style.transform = `translate3d(${x*SPACING}px, ${y*SPACING}px, ${z*SPACING}px)`;
-
-        const inner = document.createElement('div');
-        inner.className = 'cubelet-inner';
-
-        Object.keys(FACE_TRANSFORM).forEach(face => {
-          const sticker = document.createElement('div');
-          sticker.className = 'sticker';
-          sticker.style.background = COLORS[face];
-          sticker.style.transform = FACE_TRANSFORM[face];
-          inner.appendChild(sticker);
-        });
-
-        outer.appendChild(inner);
-        cube.appendChild(outer);
-        cubelets.push({ el: outer, inner, x, y, z, rot: '' });
-      }
-    }
-  }
-
-  // rotate a 90deg layer turn. axis: 'x'|'y'|'z', layer: -1|0|1, dir: 1|-1
-  function rotateLayer(axis, layer, dir, animate, done){
-    const group = cubelets.filter(c => c[axis] === layer);
-
-    function applyFinal(){
-      group.forEach(c => {
-        let nx = c.x, ny = c.y, nz = c.z;
-        if (axis === 'x'){ ny = -c.z*dir; nz = c.y*dir; }
-        else if (axis === 'y'){ nx = c.z*dir; nz = -c.x*dir; }
-        else { nx = -c.y*dir; ny = c.x*dir; }
-        c.x = nx; c.y = ny; c.z = nz;
-        c.rot = `rotate${AXIS_LETTER[axis]}(${90*dir}deg) ${c.rot}`.trim();
-        c.el.style.transition = 'none';
-        c.el.style.transform = `translate3d(${nx*SPACING}px, ${ny*SPACING}px, ${nz*SPACING}px)`;
-        c.inner.style.transform = c.rot;
-      });
-    }
-
-    if (!animate || reduce){
-      applyFinal();
-      done && done();
-      return;
-    }
-
-    const wrap = document.createElement('div');
-    wrap.className = 'layer-wrap';
-    cube.appendChild(wrap);
-    group.forEach(c => wrap.appendChild(c.el));
-
-    // force reflow so the transition below actually animates
-    wrap.getBoundingClientRect();
-    wrap.style.transition = 'transform 320ms cubic-bezier(.4,.1,.2,1)';
-    wrap.style.transform = `rotate${AXIS_LETTER[axis]}(${90*dir}deg)`;
-
-    let finished = false;
-    function finish(){
-      if (finished) return;
-      finished = true;
-      group.forEach(c => cube.appendChild(c.el));
-      wrap.remove();
-      applyFinal();
-      done && done();
-    }
-    wrap.addEventListener('transitionend', finish, { once:true });
-    setTimeout(finish, 420); // safety fallback
-  }
-
-  const AXES = ['x','y','z'];
-  const LAYERS = [-1,0,1];
-  function randomMove(){
-    return {
-      axis: AXES[Math.floor(Math.random()*3)],
-      layer: LAYERS[Math.floor(Math.random()*3)],
-      dir: Math.random() < 0.5 ? 1 : -1
-    };
-  }
-
-  let isAnimating = false;
-  let hovering = false;
-  const history = [];
-
-  function scrambleStep(animate){
-    if (isAnimating || hovering) return;
-    const mv = randomMove();
-    isAnimating = true;
-    rotateLayer(mv.axis, mv.layer, mv.dir, animate, () => {
-      isAnimating = false;
-      history.push(mv);
-    });
-  }
-
-  // initial scramble, instant
-  for (let i = 0; i < 16; i++) scrambleStep(false);
-
-  // keep gently scrambling while idle
-  const scrambleTimer = setInterval(() => scrambleStep(!reduce), 1100);
-
-  function solveStep(){
-    if (!hovering) return;
-    if (isAnimating){ setTimeout(solveStep, 40); return; }
-    if (history.length === 0) return; // fully solved — rest here
-    const mv = history.pop();
-    isAnimating = true;
-    rotateLayer(mv.axis, mv.layer, -mv.dir, true, () => {
-      isAnimating = false;
-      setTimeout(solveStep, 90);
-    });
-  }
-
-  stage.addEventListener('pointerenter', () => { hovering = true; solveStep(); });
-  stage.addEventListener('pointerleave', () => { hovering = false; });
-
-  // gentle overall viewing tilt/spin, independent of the layer turns above
-  let ax = 22, ay = -30;
-  function spin(){
-    if (!hovering){ ax += 0.12; ay += 0.18; }
-    cube.style.transform = `rotateX(${ax}deg) rotateY(${ay}deg)`;
+  let a=22,b=-30,sp=1,drag=null;
+  const setView=()=>{cu.style.transform=`rotateX(${a}deg) rotateY(${b}deg)`};
+  function down(e){if(!playing||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY}}
+  st.addEventListener('pointerdown',down);play.addEventListener('pointerdown',down);
+  window.addEventListener('pointermove',e=>{
+    if(!drag)return;
+    b+=(e.clientX-drag.x)*.6;a=Math.max(-85,Math.min(85,a-(e.clientY-drag.y)*.6));
+    drag={x:e.clientX,y:e.clientY};setView();
+  });
+  window.addEventListener('pointerup',()=>{drag=null});
+  setView();
+  if(!rm)(function spin(){
+    sp+=((hov||playing||drag?0:1)-sp)*.06;a+=.12*sp;b+=.18*sp;setView();
     requestAnimationFrame(spin);
-  }
-  if (!reduce) spin();
-  else cube.style.transform = 'rotateX(22deg) rotateY(-30deg)';
-})();
-
-/* ---------------- faint technical backdrop for each project card ---------------- */
-(function(){
-  document.querySelectorAll('.card-backdrop').forEach(el => {
-    const tokens = (el.dataset.tokens || '').split(',').filter(Boolean);
-    if (!tokens.length) return;
-    let out = '';
-    for (let i = 0; i < 60; i++){
-      out += tokens[Math.floor(Math.random()*tokens.length)] + '  ';
-    }
-    el.textContent = out;
-  });
+  })();
 })();
 </script>
-
 </body>
 </html>
