@@ -2,271 +2,332 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ece5d4">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Harsh Thorat</title>
 <meta name="description" content="Harsh Thorat. Electrical Engineering student interested in wireless communication and electronics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Noto+Sans+Devanagari:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bricolage+Grotesque:wght@500;800&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+Devanagari:wght@800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --oat:#ece5d4;
-  --pine:#1d3a2d;
-  --muted:#5b7165;
-  --line:rgba(29,58,45,.16);
-  --lilac:#d6caf0;
-  --live:#8c74c7;
-  --ease:cubic-bezier(.22,1,.36,1);
-}
+:root{--paper:#fff;--ink:#0a0a0a;--mute:#3a3a3a;--veil:rgba(255,255,255,.95);color-scheme:light;
+  --disp:'Bricolage Grotesque','Zen Kaku Gothic New',sans-serif;--comic:'Bangers','Impact',sans-serif;--hand:'Caveat',cursive;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --gut:clamp(20px,5vw,64px);--ease:cubic-bezier(.22,1,.36,1);--sz:90px;--ps:2.7;--edge:26px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--oat);color:var(--pine);font:17px/1.65 Inter,sans-serif;-webkit-font-smoothing:antialiased}
-::selection{background:var(--lilac)}
-.wrap{max-width:620px;margin:0 auto;padding:0 24px}
-a{color:inherit;text-decoration-color:var(--line);text-underline-offset:4px}
-a:hover{background:var(--lilac);text-decoration-color:var(--pine)}
-a:focus-visible{outline:2px solid var(--live);outline-offset:3px}
-
-nav{display:flex;justify-content:flex-end;gap:22px;padding-top:36px;font-size:14px;color:var(--muted)}
-nav a{text-decoration:none}
-
-h1{font:500 clamp(44px,10vw,72px)/1.05 Fraunces,serif;letter-spacing:-.025em;margin:72px 0 36px;min-height:1.1em}
-h1 span{display:inline-block;transition:opacity .7s var(--ease),filter .7s var(--ease)}
-h1 span.fade{opacity:0;filter:blur(4px)}
-h1 .mr{font-family:'Noto Sans Devanagari',Fraunces,serif}
-
-.about::after{content:"";display:block;clear:both}
-.about p{margin:0 0 1em}
-.about img{float:right;width:150px;height:auto;margin:6px 0 12px 28px;border-radius:3px;display:block}
-
-h2{font:400 14px/1 Inter,sans-serif;color:var(--muted);margin:80px 0 0;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.proj{padding:26px 0;border-bottom:1px solid var(--line)}
-.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-h3{font:500 24px/1.2 Fraunces,serif;letter-spacing:-.01em;margin:0}
-h3 a{text-decoration:none}
-.st{font-size:13px;color:var(--muted);white-space:nowrap}
-.proj p{margin:12px 0 0;color:var(--muted);font-size:16px;max-width:54ch}
-
-footer{padding:56px 0 120px;font-size:13px;color:var(--muted)}
-
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:#fff;color:var(--ink);font:400 17px/1.75 'Zen Kaku Gothic New',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--ink);color:#fff}
+a{color:inherit;text-decoration:none}
+a:hover{background:var(--ink);color:#fff}
+a:focus-visible,button:focus-visible,#cube-stage:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 var(--gut)}
+.sk{position:relative;background:#fff}
+.sk::before,.sk::after{content:"";position:absolute;pointer-events:none;border:2.5px solid var(--ink);border-radius:3px;filter:url(#rough)}
+.sk::before{inset:0}
+.sk::after{inset:-4px 3px 4px -3px;border-width:1.3px;transform:rotate(-.4deg);opacity:.75}
+.top{display:flex;justify-content:space-between;align-items:center;padding-top:calc(30px + env(safe-area-inset-top,0px));font-weight:700;font-size:15px}
+.top .logo{font:400 28px/1 var(--comic);letter-spacing:.05em}
+.top nav{display:flex;gap:22px}
+.top nav a{padding:0 4px;border-bottom:2px solid var(--ink)}
+.hero{padding:70px 0 20px}
+.chap{display:inline-block;font:400 22px/1 var(--comic);letter-spacing:.08em;padding:7px 16px;transform:rotate(-2deg)}
+h1{font:800 clamp(48px,10vw,124px)/1.04 var(--disp);letter-spacing:-.035em;margin:22px 0 0;min-height:1.3em}
+h1 span{display:inline-block;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+h1 span.fade{opacity:0;transform:translateY(14px)}
+h1 .mr{font-family:'Noto Serif Devanagari',serif;font-weight:800;letter-spacing:0;line-height:1.3}
+.ul{display:block;width:min(420px,70%);height:18px;margin:2px 0 0;overflow:visible}
+.ul path{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.role{margin:20px 0 0;font:700 clamp(18px,2.2vw,22px)/1.4 var(--disp)}
+.intro{max-width:36em;margin:18px 0 0;font-size:clamp(17px,1.9vw,19px)}
+.cuber{max-width:36em;margin:12px 0 0;font-size:15px;color:var(--mute)}
+.wp{margin:56px 0 0;padding:26px 24px}
+.wp .lines{position:absolute;inset:6px;opacity:.55;background:repeating-conic-gradient(from 0deg at 50% 50%,var(--ink) 0 .3deg,transparent .3deg 3.5deg);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 50%,transparent 28%,#000 92%);mask-image:radial-gradient(ellipse at 50% 50%,transparent 28%,#000 92%)}
+.wave{position:relative;display:block;width:100%;height:110px;overflow:visible}
+.wave path{fill:none;vector-effect:non-scaling-stroke}
+.wave .c{stroke:var(--ink);stroke-width:2.4;stroke-linejoin:round}
+.wave .e{stroke:var(--ink);stroke-opacity:.4;stroke-width:1.2;stroke-dasharray:3 6}
+.note{margin:16px 0 0 6px;font:500 22px/1.2 var(--hand)}
+@media(prefers-reduced-motion:no-preference){
+.wave .c{stroke-dasharray:1;stroke-dashoffset:1;animation:dr 2.4s var(--ease) .3s forwards}
+.ul path{stroke-dasharray:1;stroke-dashoffset:1;animation:dr 1.2s var(--ease) .9s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}}
+.h2{display:inline-block;margin:104px 0 10px;padding:6px 24px 8px;font:400 clamp(34px,5vw,50px)/1.1 var(--comic);letter-spacing:.06em;transform:rotate(-1.5deg)}
+.sub{margin:6px 0 30px 6px;font:500 24px/1.2 var(--hand)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.l{transform:translateX(-30px)}
+.rv.in{opacity:1;transform:none}
+.h2.rv.in{transform:rotate(-1.5deg)}
+/* terminal */
+.term{background:var(--ink);color:#f2f2f2;font:400 14.5px/1.65 var(--mono)}
+.tbar{position:relative;display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px dashed rgba(255,255,255,.3);font-size:12px;color:rgba(255,255,255,.7)}
+.tbar i{width:11px;height:11px;border:2px solid #f2f2f2;border-radius:50%}
+.tbar span{margin-left:8px}
+.tbody{position:relative;height:min(60vh,470px);padding:18px 20px 22px;overflow:auto;cursor:text;overscroll-behavior:contain}
+.ln{margin:0 0 2px;white-space:pre-wrap;word-break:break-word}
+.ps,.dim{color:rgba(255,255,255,.55)}
+.live{display:flex;gap:8px;align-items:center}
+.live .ps{white-space:nowrap}
+.live input{flex:1;min-width:0;padding:0;background:none;border:0;outline:0;color:#fff;font:inherit;caret-color:#fff}
+.lsr{display:grid;grid-template-columns:5ch 19ch 1fr;gap:0 12px}
+.f{all:unset;cursor:pointer;color:#fff;border-bottom:1px dotted rgba(255,255,255,.65)}
+.f:hover,.f:focus-visible{background:#fff;color:var(--ink);outline:2px solid #fff;outline-offset:2px}
+.term a{color:#fff;border-bottom:1px solid #fff}
+.term a:hover{background:#fff;color:var(--ink)}
+.try{display:flex;flex-wrap:wrap;align-items:center;gap:12px 10px;margin:24px 0 0}
+.try b{margin-right:6px;font:500 24px/1 var(--hand)}
+.try button{font:700 13px var(--mono);color:var(--ink);background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:8px 12px;cursor:pointer;transition:transform .2s var(--ease),box-shadow .2s}
+.try button:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.try button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.else{display:flex;flex-wrap:wrap;gap:12px 30px;font:700 18px/1.4 var(--disp);margin:30px 0 0}
+.else a{border-bottom:3px solid var(--ink)}
+.ring{margin:26px 0 0;font-size:15px}
+.ring a{border-bottom:2px solid var(--ink)}
+footer{padding:80px 0 160px;font-size:13px;color:var(--mute)}
 /* cube */
-:root{--sz:70px;--ps:3.4;--edge:26px}
 body.play{overflow:hidden}
-#cube-stage{position:fixed;right:var(--edge);bottom:var(--edge);width:var(--sz);height:var(--sz);z-index:6;perspective:420px;cursor:pointer;touch-action:none;
-transition:right .8s var(--ease),bottom .8s var(--ease),transform .8s var(--ease)}
+#cube-stage{position:fixed;right:var(--edge);bottom:calc(var(--edge) + env(safe-area-inset-bottom,0px));width:var(--sz);height:var(--sz);z-index:6;perspective:420px;cursor:pointer;touch-action:none;
+  transition:right .8s var(--ease),bottom .8s var(--ease),transform .8s var(--ease)}
 body.play #cube-stage{right:calc(50% - var(--sz)/2);bottom:calc(58% - var(--sz)/2);transform:scale(var(--ps));cursor:grab}
 #cube{width:100%;height:100%;position:relative;transform-style:preserve-3d}
 .cubelet,.cubelet-inner,.layer-wrap{position:absolute;transform-style:preserve-3d}
 .cubelet-inner,.layer-wrap{inset:0}
-.sticker{position:absolute;inset:0;border-radius:3px;box-shadow:inset 0 0 0 2px #14201a}
-#cap{position:fixed;right:var(--edge);bottom:calc(var(--edge) + var(--sz) + 6px);font-size:11px;color:var(--muted);transition:opacity .3s;pointer-events:none}
+.sticker{position:absolute;inset:0;border-radius:3px;box-shadow:inset 0 0 0 2px #0b0b0b}
+#cap{position:fixed;right:var(--edge);bottom:calc(var(--edge) + var(--sz) + 4px + env(safe-area-inset-bottom,0px));font:500 22px/1 var(--hand);color:var(--ink);transition:opacity .3s;pointer-events:none}
 body.play #cap{opacity:0}
-
-/* play overlay */
-#play{position:fixed;inset:0;z-index:5;background:rgba(236,229,212,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 20px 34px;opacity:0;visibility:hidden;touch-action:none;
-transition:opacity .5s var(--ease),visibility .5s}
+#play{position:fixed;inset:0;z-index:5;background:var(--veil);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:0 20px calc(34px + env(safe-area-inset-bottom,0px));opacity:0;visibility:hidden;touch-action:none;transition:opacity .5s var(--ease),visibility .5s}
 body.play #play{opacity:1;visibility:visible}
-.hint{font-size:13px;color:var(--muted);margin:0 0 16px;text-align:center;max-width:38ch}
+.hint{font:500 13px/1.6 'Zen Kaku Gothic New',sans-serif;color:var(--mute);margin:0 0 16px;text-align:center;max-width:44ch}
 .moves{display:grid;grid-template-columns:repeat(6,46px);gap:8px;margin-bottom:12px}
-#play button{font:500 14px Inter,sans-serif;color:var(--pine);background:transparent;border:1px solid var(--line);border-radius:10px;height:44px;cursor:pointer;
-transition:background .25s,border-color .25s,transform .25s var(--ease)}
-#play button:hover{background:var(--lilac);border-color:var(--live)}
-#play button:active{transform:scale(.94)}
-#play button:focus-visible{outline:2px solid var(--live);outline-offset:2px}
-.row{display:flex;gap:8px}
-.row button{padding:0 22px}
-#sol{background:var(--pine);color:var(--oat);border-color:var(--pine)}
-#sol:hover{background:var(--live);border-color:var(--live);color:#fff}
-
-@media(max-width:560px){
-  h1{margin-top:48px}
-  .about img{float:none;margin:8px 0 0;width:140px}
-  .head{flex-direction:column;gap:6px}
-  :root{--sz:50px;--ps:4.4;--edge:16px}
+#play button{font:700 14px 'Zen Kaku Gothic New',sans-serif;color:var(--ink);background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);height:44px;cursor:pointer;transition:transform .2s var(--ease),box-shadow .2s}
+#play button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.prow{display:flex;gap:10px}
+.prow button{padding:0 22px}
+#play #sol{background:var(--ink);color:#fff}
+@media(max-width:720px){
+  .top nav{gap:12px}.h2{margin-top:84px}.tbody{height:min(62vh,430px);padding:16px 14px}.term{font-size:13px}.lsr{grid-template-columns:1fr;gap:0}.lsr>span:first-child{display:none}
+  .ps .u{display:none}
+  :root{--sz:58px;--ps:4;--edge:16px}
 }
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  h1 span,#cube-stage,#play{transition:none}
-}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}h1 span,#cube-stage,#play,.rv{transition:none}.rv{opacity:1;transform:none}.h2.rv{transform:rotate(-1.5deg)}}
 </style>
 </head>
 <body>
-
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></svg>
 <div class="wrap">
-  <nav>
-    <a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">github</a>
-    <a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">linkedin</a>
-    <a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">x</a>
-  </nav>
-
-  <h1><span id="name-slot">हर्ष थोरात</span></h1>
-
-  <div class="about">
-    <img src="assets/harsh.jpg" alt="Harsh as a kid, sitting on a scooter">
-    <p>I'm an Electrical Engineering student with a minor in Quantum Technology. I'm interested in wireless communication and electronics, and I'm trying to learn many things.</p>
-    <p>I'm also a speedcuber.</p>
-  </div>
-
-  <h2>Now</h2>
-  <article class="proj">
-    <div class="head">
-      <h3><a href="https://github.com/harshthorat-cpu?tab=repositories" target="_blank" rel="noopener">Silent Ack</a></h3>
-      <span class="st">in progress</span>
-    </div>
-    <p>Measures the round-trip time of WhatsApp delivery receipts in your own "Message yourself" chat. A companion client reacts to one pinned anchor message, the phone acknowledges it, and the time between the two is the RTT. The recipient is always the account itself, so it's a measurement tool for devices you own.</p>
-  </article>
-  <article class="proj">
-    <div class="head">
-      <h3><a href="https://github.com/harshthorat-cpu/Noema" target="_blank" rel="noopener">Noema</a></h3>
-    </div>
-    <p>Reinforcement learning where the agent never sees the state. The environment encrypts each state before the agent gets it, so the agent isn't looking at a grid, a pixel, or a coordinate. It's looking at ciphertext, and if you printed one of its observations you'd see noise.</p>
-  </article>
-  <article class="proj">
-    <div class="head">
-      <h3><a href="https://github.com/harshthorat-cpu/PLATYPULSE" target="_blank" rel="noopener">PLATYPULSE</a></h3>
-    </div>
-    <p>A unified handheld built around the ESP32-S3 that brings RF, RFID/NFC, and IR into one interface: capture, analyze, store, and transmit signals without juggling three separate tools.</p>
-  </article>
-  <article class="proj">
-    <div class="head">
-      <h3><a href="https://github.com/harshthorat-cpu/Eklavya_Gantry" target="_blank" rel="noopener">GantryMate‑200</a></h3>
-    </div>
-    <p>A 3-axis gantry that screws and unscrews about 280 miniature 1 mm screws on a two-layer LED panel: 200 on the top layer, 80 below. ESP32, DRV8825 drivers and NEMA 17 motors, plus a custom toolhead. The target is sub-millimeter positioning and under 5 seconds per screw. A team build with SRA-VJTI.</p>
-  </article>
-
-  <footer>© 2026 Harsh Thorat</footer>
+<div class="top"><a class="logo" href="#top" aria-label="Harsh Thorat">HT</a>
+<nav><a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">github</a><a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">linkedin</a><a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">x</a></nav></div>
+<header class="hero" id="top">
+<span class="chap sk">Chapter 01: Hello</span>
+<h1><span id="name-slot">हर्ष थोरात</span></h1>
+<svg class="ul" viewBox="0 0 420 18" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 11C60 2 110 16 170 8S290 3 340 10 400 8 418 5"/></svg>
+<p class="role">Electrical Engineering, minor in Quantum Technology</p>
+<p class="intro">I’m interested in wireless communication and electronics, and I’m trying to learn many things.</p>
+<p class="cuber">I’m also a speedcuber. The cube in the corner is real: hover and it solves itself, click and you can play.</p>
+<div class="wp sk"><div class="lines"></div>
+<svg class="wave" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path class="e" id="we1"/><path class="e" id="we2"/><path class="c" id="wc" pathLength="1"/></svg></div>
+<p class="note">an amplitude-modulated carrier. scroll and the phase shifts.</p>
+</header>
+<main>
+<h2 class="h2 sk rv l">Work</h2>
+<p class="sub rv">what I’m building right now</p>
+<div class="term sk rv" id="term">
+<div class="tbar"><i></i><i></i><i></i><span>harsh@vjti: ~/projects</span></div>
+<div class="tbody" id="tb"><div id="out"></div>
+<div class="live"><span class="ps"><span class="u">harsh@vjti </span>~/projects $</span><input id="in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command"></div></div>
 </div>
-
+<div class="try rv"><b>try:</b><button data-c="ls">ls</button><button data-c="cat silent-ack">cat silent-ack</button><button data-c="cat noema">cat noema</button><button data-c="cat platypulse">cat platypulse</button><button data-c="cat gantrymate-200">cat gantrymate-200</button><button data-c="help">help</button><button data-c="clear">clear</button></div>
+<noscript><ul><li><a href="https://github.com/harshthorat-cpu?tab=repositories">Silent Ack</a></li><li><a href="https://github.com/harshthorat-cpu/Noema">Noema</a></li><li><a href="https://github.com/harshthorat-cpu/PLATYPULSE">PLATYPULSE</a></li><li><a href="https://github.com/harshthorat-cpu/Eklavya_Gantry">GantryMate‑200</a></li></ul></noscript>
+<h2 class="h2 sk rv l">Elsewhere</h2>
+<p class="else rv"><a href="https://github.com/harshthorat-cpu" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/harsh-thorat-1b1092388/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/harshthorat_8" target="_blank" rel="noopener">X</a></p>
+<p class="ring rv">My friends from SRA-VJTI are on the <a href="https://sravjti.in/webring/" target="_blank" rel="noopener">SRA Webring</a>.</p>
+</main>
+<footer>© 2026 Harsh Thorat</footer>
+</div>
 <div id="play" aria-hidden="true">
-  <p class="hint">Drag to turn the view. Tap a move, or press u d l r f b on a keyboard (hold shift to reverse).</p>
-  <div class="moves" id="moves"></div>
-  <div class="row"><button id="scr">Scramble</button><button id="sol">Solve</button><button id="cls">Close</button></div>
+<p class="hint">Drag to turn the view. Tap a move, or press u d l r f b on a keyboard (hold shift to reverse).</p>
+<div class="moves" id="moves"></div>
+<div class="prow"><button id="scr">Scramble</button><button id="sol">Solve</button><button id="cls">Close</button></div>
 </div>
 <div id="cap">click to play</div>
-<div id="cube-stage" role="button" tabindex="0" aria-label="Play with the Rubik's cube" title="hover: it solves itself. click: play"><div id="cube"></div></div>
-
+<div id="cube-stage" role="button" tabindex="0" aria-label="Play with the Rubik’s cube" title="hover: it solves itself. click: play"><div id="cube"></div></div>
 <script>
 const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-/* name: marathi <-> english */
 (function(){
-  const el=document.getElementById('name-slot'),f=[['हर्ष थोरात','mr'],['Harsh Thorat','']];let i=0;
-  setInterval(()=>{el.classList.add('fade');setTimeout(()=>{i=(i+1)%2;el.textContent=f[i][0];el.className=f[i][1]+' fade';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('fade')))},700)},3800);
+const el=document.getElementById('name-slot'),f=[['हर्ष थोरात','mr'],['Harsh Thorat','']];let i=0;
+setInterval(()=>{el.classList.add('fade');setTimeout(()=>{i=(i+1)%2;el.textContent=f[i][0];el.className=f[i][1]+' fade';
+requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('fade')))},600)},3800);
 })();
-
+/* scroll reveal + carrier wave */
+(function(){
+const els=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});els.forEach(e=>io.observe(e))}
+else els.forEach(e=>e.classList.add('in'));
+const c=document.getElementById('wc'),e1=document.getElementById('we1'),e2=document.getElementById('we2'),N=320;
+function draw(ph){let p='',a='',b='';
+for(let i=0;i<=N;i++){const x=i/N,env=.55+.4*Math.sin(x*Math.PI*3+ph*.4),X=(x*1000).toFixed(1);
+p+=(i?'L':'M')+X+' '+(60-50*env*Math.sin(x*Math.PI*2*22+ph)).toFixed(1);
+a+=(i?'L':'M')+X+' '+(60-50*env).toFixed(1);b+=(i?'L':'M')+X+' '+(60+50*env).toFixed(1)}
+c.setAttribute('d',p);e1.setAttribute('d',a);e2.setAttribute('d',b)}
+draw(0);
+if(!rm){let t=false;addEventListener('scroll',()=>{if(!t){t=true;requestAnimationFrame(()=>{t=false;draw(scrollY*.02)})}},{passive:true})}
+})();
+/* terminal */
+(function(){
+const P=[
+{n:'silent-ack',t:'Silent Ack',s:'in progress',u:'https://github.com/harshthorat-cpu?tab=repositories',d:'Measures the round-trip time of WhatsApp delivery receipts in your own “Message yourself” chat. A companion client reacts to one pinned anchor message, the phone acknowledges it, and the time between the two is the RTT. The recipient is always the account itself, so it’s a measurement tool for devices you own.'},
+{n:'noema',t:'Noema',s:'',u:'https://github.com/harshthorat-cpu/Noema',d:'Reinforcement learning where the agent never sees the state. The environment encrypts each state before the agent gets it, so the agent isn’t looking at a grid, a pixel, or a coordinate. It’s looking at ciphertext, and if you printed one of its observations you’d see noise.'},
+{n:'platypulse',t:'PLATYPULSE',s:'',u:'https://github.com/harshthorat-cpu/PLATYPULSE',d:'A unified handheld built around the ESP32-S3 that brings RF, RFID/NFC, and IR into one interface: capture, analyze, store, and transmit signals without juggling three separate tools.'},
+{n:'gantrymate-200',t:'GantryMate‑200',s:'with SRA-VJTI',u:'https://github.com/harshthorat-cpu/Eklavya_Gantry',d:'A 3-axis gantry that screws and unscrews about 280 miniature 1 mm screws on a two-layer LED panel: 200 on the top layer, 80 below. The target is sub-millimeter positioning and under 5 seconds per screw.',k:'ESP32, DRV8825 drivers, NEMA 17 motors, custom toolhead'}];
+const T=document.getElementById('tb'),O=document.getElementById('out'),I=document.getElementById('in');
+const PS='<span class="ps">harsh@vjti ~/projects $</span> ';
+const sleep=ms=>rm?Promise.resolve():new Promise(r=>setTimeout(r,ms));
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const down=()=>{T.scrollTop=T.scrollHeight};
+function ln(h,c){const d=document.createElement('div');d.className='ln '+(c||'');d.innerHTML=h;O.appendChild(d);down();return d}
+async function typeInto(el,s,ms){if(rm){el.textContent=s;return}for(let i=0;i<s.length;i+=3){el.textContent=s.slice(0,i+3);down();await sleep(ms)}}
+const find=q=>{q=(q||'').toLowerCase().replace(/\/$/,'');return q&&P.find(p=>p.n.startsWith(q)||p.n.includes(q))};
+const hist=[];let hi=0;
+async function show(p){
+ln('<b>'+p.t+'</b>'+(p.s?'  <span class="dim">['+p.s+']</span>':''));await sleep(140);
+const d=ln('');await typeInto(d,p.d,12);
+if(p.k)ln('<span class="dim">stack:</span> '+esc(p.k));
+ln('<span class="dim">link:</span> <a href="'+p.u+'" target="_blank" rel="noopener">'+p.u.replace('https://','')+'</a>');
+}
+async function exec(raw){
+const c=raw.trim();if(!c)return;
+ln(PS+esc(c));hist.push(c);hi=hist.length;
+const[a,...r]=c.split(/\s+/),arg=r.join(' ');
+if(a==='clear'){O.innerHTML='';return}
+if(a==='help'){['ls                list projects','cat <project>     read about a project','open <project>    open its repository','whoami            who is this','clear             clean the screen'].forEach(x=>ln(x,'dim'));return}
+if(a==='ls'){ln('<span class="dim">total '+P.length+'</span>');for(const p of P){await sleep(110);ln('<div class="lsr"><span class="dim">drwx</span><button class="f" data-c="cat '+p.n+'">'+p.n+'/</button><span class="dim">'+p.s+'</span></div>')}return}
+if(a==='cat'||a==='open'){const p=find(arg);
+if(!p){ln(a+': '+esc(arg||'?')+': no such project. try ls','dim');return}
+if(a==='open'){ln('opening <a href="'+p.u+'" target="_blank" rel="noopener">'+p.u.replace('https://','')+'</a>');window.open(p.u,'_blank','noopener');return}
+await show(p);return}
+if(a==='whoami'){ln('Harsh Thorat. Electrical Engineering, minor in Quantum Technology.');return}
+ln('command not found: '+esc(a)+'. try help','dim');
+}
+let chain=Promise.resolve();
+const go=c=>{chain=chain.then(async()=>{I.readOnly=true;I.value='';for(const ch of c){I.value+=ch;await sleep(34)}await sleep(180);I.value='';I.readOnly=false;await exec(c)})};
+I.addEventListener('keydown',e=>{
+if(e.key==='Enter'){const v=I.value;I.value='';chain=chain.then(()=>exec(v))}
+else if(e.key==='ArrowUp'&&hist.length){e.preventDefault();hi=Math.max(0,hi-1);I.value=hist[hi]}
+else if(e.key==='ArrowDown'){e.preventDefault();hi=Math.min(hist.length,hi+1);I.value=hist[hi]||''}
+else if(e.key==='Tab'){e.preventDefault();const[w,...r]=I.value.split(' ');
+if(r.length){const p=find(r.join(' '));if(p)I.value=w+' '+p.n}else if(w){const m=['help','ls','cat','open','whoami','clear'].find(x=>x.startsWith(w));if(m)I.value=m+' '}}
+});
+T.addEventListener('click',e=>{if(!e.target.closest('a,button')&&!getSelection().toString())I.focus({preventScroll:true})});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(b)go(b.dataset.c)});
+ln('<span class="dim">type help, or tap a command below.</span>');
+const term=document.getElementById('term');
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();go('ls');go('cat silent-ack')}},{threshold:.45});io.observe(term)}
+else{go('ls')}
+})();
 /* cube: idles scrambled, solves on hover, playable on click */
 (function(){
-  const st=document.getElementById('cube-stage'),cu=document.getElementById('cube'),play=document.getElementById('play');
-  const S=innerWidth<560?14:20,SP=S+1,H=S/2,DK='#14201a';
-  const C={front:'#12b349',back:'#1e5bff',right:'#e11d2e',left:'#ff7a00',top:'#fafafa',bottom:'#ffd400'};
-  const T={front:`translateZ(${H}px)`,back:`rotateY(180deg) translateZ(${H}px)`,right:`rotateY(90deg) translateZ(${H}px)`,
-    left:`rotateY(-90deg) translateZ(${H}px)`,top:`rotateX(90deg) translateZ(${H}px)`,bottom:`rotateX(-90deg) translateZ(${H}px)`};
-  const L=[];
-  for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){
-    const o=document.createElement('div');o.className='cubelet';
-    o.style.cssText=`width:${S}px;height:${S}px;left:50%;top:50%;margin:${-H}px 0 0 ${-H}px;transform:translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;
-    const n=document.createElement('div');n.className='cubelet-inner';
-    const ext={front:z===1,back:z===-1,right:x===1,left:x===-1,top:y===-1,bottom:y===1};
-    for(const f in T){const e=document.createElement('div');e.className='sticker';e.style.background=ext[f]?C[f]:DK;e.style.transform=T[f];n.appendChild(e)}
-    o.appendChild(n);cu.appendChild(o);L.push({o,n,x,y,z,r:''});
-  }
-  function turn(ax,ly,d,anim,done,ms){
-    ms=ms||380;
-    const g=L.filter(c=>c[ax]===ly),A=ax.toUpperCase();
-    function fin(){
-      g.forEach(c=>{let{x,y,z}=c;
-        if(ax==='x'){y=-c.z*d;z=c.y*d}else if(ax==='y'){x=c.z*d;z=-c.x*d}else{x=-c.y*d;y=c.x*d}
-        c.x=x;c.y=y;c.z=z;c.r=`rotate${A}(${90*d}deg) ${c.r}`.trim();
-        c.o.style.transform=`translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;c.n.style.transform=c.r});
-      done&&done();
-    }
-    if(!anim||rm){fin();return}
-    const w=document.createElement('div');w.className='layer-wrap';cu.appendChild(w);g.forEach(c=>w.appendChild(c.o));
-    w.getBoundingClientRect();
-    w.style.transition=`transform ${ms}ms cubic-bezier(.45,.05,.2,1)`;w.style.transform=`rotate${A}(${90*d}deg)`;
-    let ok=false;const end=()=>{if(ok)return;ok=true;g.forEach(c=>cu.appendChild(c.o));w.remove();fin()};
-    w.addEventListener('transitionend',end,{once:true});setTimeout(end,ms+100);
-  }
-
-  /* standard notation, clockwise as seen looking at that face */
-  const MV={U:['y',-1,-1],D:['y',1,1],L:['x',-1,1],R:['x',1,-1],F:['z',1,1],B:['z',-1,-1]};
-  const AX=['x','y','z'],LY=[-1,0,1];
-  const rand=()=>({ax:AX[Math.random()*3|0],ly:LY[Math.random()*3|0],d:Math.random()<.5?1:-1});
-  const hist=[],queue=[];
-  let busy=false,hov=false,playing=false,solving=false;
-
-  function record(m){const l=hist[hist.length-1];
-    if(l&&l.ax===m.ax&&l.ly===m.ly&&l.d===-m.d)hist.pop();else hist.push(m)}
-  function pump(){
-    if(busy||!queue.length)return;
-    const q=queue.shift();busy=true;
-    turn(q.ax,q.ly,q.d,true,()=>{busy=false;record(q);pump()},q.ms);
-  }
-  function solveStep(ms){
-    if(busy){setTimeout(()=>solveStep(ms),30);return}
-    if(!hist.length||(!hov&&!playing)){solving=false;return}
-    const m=hist.pop();busy=true;
-    turn(m.ax,m.ly,-m.d,true,()=>{busy=false;solveStep(ms)},ms);
-  }
-  function startSolve(ms){if(solving)return;queue.length=0;solving=true;solveStep(ms)}
-  function userMove(name,prime){
-    if(solving||queue.length>12)return;
-    const[ax,ly,d]=MV[name];queue.push({ax,ly,d:prime?-d:d,ms:220});pump();
-  }
-  function scramble(){
-    if(solving)return;
-    for(let i=0;i<20;i++){const m=rand();m.ms=140;queue.push(m)}
-    pump();
-  }
-
-  for(let i=0;i<16;i++){const m=rand();turn(m.ax,m.ly,m.d,false);record(m)}
-  setInterval(()=>{
-    if(busy||hov||playing||solving||queue.length)return;
-    const m=rand();m.ms=380;queue.push(m);pump();
-  },1400);
-
-  st.addEventListener('pointerenter',()=>{if(playing)return;hov=true;startSolve(380)});
-  st.addEventListener('pointerleave',()=>{hov=false});
-
-  const mv=document.getElementById('moves');
-  ['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-label',n+' clockwise');b.onclick=()=>userMove(n,false);mv.appendChild(b)});
-  ['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n+'\u2032';b.setAttribute('aria-label',n+' counterclockwise');b.onclick=()=>userMove(n,true);mv.appendChild(b)});
-  document.getElementById('scr').onclick=scramble;
-  document.getElementById('sol').onclick=()=>startSolve(150);
-  function open(){
-    if(playing)return;
-    playing=true;hov=false;document.body.classList.add('play');play.setAttribute('aria-hidden','false');
-    if(hist.length<6&&!solving)scramble();
-  }
-  function close(){playing=false;document.body.classList.remove('play');play.setAttribute('aria-hidden','true')}
-  document.getElementById('cls').onclick=close;
-  st.addEventListener('click',open);
-  st.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
-  window.addEventListener('keydown',e=>{
-    if(!playing)return;
-    if(e.key==='Escape'){close();return}
-    const k=e.key.toUpperCase();
-    if(MV[k]&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();userMove(k,e.key===k&&e.key!==e.key.toLowerCase())}
-  });
-
-  let a=22,b=-30,sp=1,drag=null;
-  const setView=()=>{cu.style.transform=`rotateX(${a}deg) rotateY(${b}deg)`};
-  function down(e){if(!playing||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY}}
-  st.addEventListener('pointerdown',down);play.addEventListener('pointerdown',down);
-  window.addEventListener('pointermove',e=>{
-    if(!drag)return;
-    b+=(e.clientX-drag.x)*.6;a=Math.max(-85,Math.min(85,a-(e.clientY-drag.y)*.6));
-    drag={x:e.clientX,y:e.clientY};setView();
-  });
-  window.addEventListener('pointerup',()=>{drag=null});
-  setView();
-  if(!rm)(function spin(){
-    sp+=((hov||playing||drag?0:1)-sp)*.06;a+=.12*sp;b+=.18*sp;setView();
-    requestAnimationFrame(spin);
-  })();
+const st=document.getElementById('cube-stage'),cu=document.getElementById('cube'),play=document.getElementById('play');
+const S=innerWidth<560?18:28,SP=S+1,H=S/2,DK='#111';
+const C={front:'#12b349',back:'#1e5bff',right:'#e11d2e',left:'#ff7a00',top:'#fafafa',bottom:'#ffd400'};
+const T={front:`translateZ(${H}px)`,back:`rotateY(180deg) translateZ(${H}px)`,right:`rotateY(90deg) translateZ(${H}px)`,
+left:`rotateY(-90deg) translateZ(${H}px)`,top:`rotateX(90deg) translateZ(${H}px)`,bottom:`rotateX(-90deg) translateZ(${H}px)`};
+const L=[];
+for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){
+const o=document.createElement('div');o.className='cubelet';
+o.style.cssText=`width:${S}px;height:${S}px;left:50%;top:50%;margin:${-H}px 0 0 ${-H}px;transform:translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;
+const n=document.createElement('div');n.className='cubelet-inner';
+const ext={front:z===1,back:z===-1,right:x===1,left:x===-1,top:y===-1,bottom:y===1};
+for(const f in T){const e=document.createElement('div');e.className='sticker';e.style.background=ext[f]?C[f]:DK;e.style.transform=T[f];n.appendChild(e)}
+o.appendChild(n);cu.appendChild(o);L.push({o,n,x,y,z,r:''});
+}
+function turn(ax,ly,d,anim,done,ms){
+ms=ms||380;
+const g=L.filter(c=>c[ax]===ly),A=ax.toUpperCase();
+function fin(){
+g.forEach(c=>{let{x,y,z}=c;
+if(ax==='x'){y=-c.z*d;z=c.y*d}else if(ax==='y'){x=c.z*d;z=-c.x*d}else{x=-c.y*d;y=c.x*d}
+c.x=x;c.y=y;c.z=z;c.r=`rotate${A}(${90*d}deg) ${c.r}`.trim();
+c.o.style.transform=`translate3d(${x*SP}px,${y*SP}px,${z*SP}px)`;c.n.style.transform=c.r});
+done&&done();
+}
+if(!anim||rm){fin();return}
+const w=document.createElement('div');w.className='layer-wrap';cu.appendChild(w);g.forEach(c=>w.appendChild(c.o));
+w.getBoundingClientRect();
+w.style.transition=`transform ${ms}ms cubic-bezier(.45,.05,.2,1)`;w.style.transform=`rotate${A}(${90*d}deg)`;
+let ok=false;const end=()=>{if(ok)return;ok=true;g.forEach(c=>cu.appendChild(c.o));w.remove();fin()};
+w.addEventListener('transitionend',end,{once:true});setTimeout(end,ms+100);
+}
+/* standard notation, clockwise as seen looking at that face */
+const MV={U:['y',-1,-1],D:['y',1,1],L:['x',-1,1],R:['x',1,-1],F:['z',1,1],B:['z',-1,-1]};
+const AX=['x','y','z'],LY=[-1,0,1];
+const rand=()=>({ax:AX[Math.random()*3|0],ly:LY[Math.random()*3|0],d:Math.random()<.5?1:-1});
+const hist=[],queue=[];
+let busy=false,hov=false,playing=false,solving=false;
+function record(m){const l=hist[hist.length-1];
+if(l&&l.ax===m.ax&&l.ly===m.ly&&l.d===-m.d)hist.pop();else hist.push(m)}
+function pump(){
+if(busy||!queue.length)return;
+const q=queue.shift();busy=true;
+turn(q.ax,q.ly,q.d,true,()=>{busy=false;record(q);pump()},q.ms);
+}
+function solveStep(ms){
+if(busy){setTimeout(()=>solveStep(ms),30);return}
+if(!hist.length||(!hov&&!playing)){solving=false;return}
+const m=hist.pop();busy=true;
+turn(m.ax,m.ly,-m.d,true,()=>{busy=false;solveStep(ms)},ms);
+}
+function startSolve(ms){if(solving)return;queue.length=0;solving=true;solveStep(ms)}
+function userMove(name,prime){
+if(solving||queue.length>12)return;
+const[ax,ly,d]=MV[name];queue.push({ax,ly,d:prime?-d:d,ms:220});pump();
+}
+function scramble(){
+if(solving)return;
+for(let i=0;i<20;i++){const m=rand();m.ms=140;queue.push(m)}
+pump();
+}
+for(let i=0;i<16;i++){const m=rand();turn(m.ax,m.ly,m.d,false);record(m)}
+setInterval(()=>{
+if(busy||hov||playing||solving||queue.length)return;
+const m=rand();m.ms=380;queue.push(m);pump();
+},1400);
+st.addEventListener('pointerenter',()=>{if(playing)return;hov=true;startSolve(380)});
+st.addEventListener('pointerleave',()=>{hov=false});
+const mv=document.getElementById('moves');
+['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('aria-label',n+' clockwise');b.onclick=()=>userMove(n,false);mv.appendChild(b)});
+['U','D','L','R','F','B'].forEach(n=>{const b=document.createElement('button');b.textContent=n+'\u2032';b.setAttribute('aria-label',n+' counterclockwise');b.onclick=()=>userMove(n,true);mv.appendChild(b)});
+document.getElementById('scr').onclick=scramble;
+document.getElementById('sol').onclick=()=>startSolve(150);
+function open(){
+if(playing)return;
+playing=true;hov=false;document.body.classList.add('play');play.setAttribute('aria-hidden','false');
+if(hist.length<6&&!solving)scramble();
+}
+function close(){playing=false;document.body.classList.remove('play');play.setAttribute('aria-hidden','true')}
+document.getElementById('cls').onclick=close;
+st.addEventListener('click',open);
+st.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+window.addEventListener('keydown',e=>{
+if(!playing)return;
+if(e.key==='Escape'){close();return}
+const k=e.key.toUpperCase();
+if(MV[k]&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();userMove(k,e.key===k&&e.key!==e.key.toLowerCase())}
+});
+let a=22,b=-30,sp=1,drag=null;
+const setView=()=>{cu.style.transform=`rotateX(${a}deg) rotateY(${b}deg)`};
+function down(e){if(!playing||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY}}
+st.addEventListener('pointerdown',down);play.addEventListener('pointerdown',down);
+window.addEventListener('pointermove',e=>{
+if(!drag)return;
+b+=(e.clientX-drag.x)*.6;a=Math.max(-85,Math.min(85,a-(e.clientY-drag.y)*.6));
+drag={x:e.clientX,y:e.clientY};setView();
+});
+window.addEventListener('pointerup',()=>{drag=null});
+setView();
+if(!rm)(function spin(){
+sp+=((hov||playing||drag?0:1)-sp)*.06;a+=.12*sp;b+=.18*sp;setView();
+requestAnimationFrame(spin);
+})();
 })();
 </script>
 </body>
